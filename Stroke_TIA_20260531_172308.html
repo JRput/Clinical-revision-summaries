@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke and TIA in Over 16s — Clinical Summary</title>
+    <style>
+/* ===============================================================
+   MediGuide — Canonical Design System
+   ===============================================================
+   Educational clinical reference for healthcare professionals
+   and medical students. Single accent palette per chapter when
+   the source has multiple parallel sub-conditions; otherwise
+   navy-default. Reading is single-column main + sticky right
+   rail. Recommendation pills are inline by default; full cards
+   reserved for critical DO NOTs and primary first-line.
+   =============================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ----- Reset ----- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ----- Tokens ----- */
+:root {
+    /* Neutrals */
+    --paper:        #FFFFFF;
+    --paper-deep:   #F8F7F4;
+    --paper-edge:   #F0EEE8;
+    --ink:          #1A1F2B;
+    --ink-soft:     #2E3340;
+    --ink-muted:    #5C6371;
+    --ink-faint:    #8E939E;
+    --rule:         #E5E7EB;
+    --rule-strong:  #CBD0D9;
+
+    /* Default chapter palette (used when only one chapter, or as fallback) */
+    --accent:       #1A4F70;
+    --accent-mid:   #2A6F95;
+    --accent-pale:  #E1ECF3;
+    --accent-paler: #F2F7FB;
+
+    /* Chapter palettes (applied via .ch-osahs / .ch-ohs / .ch-copd / .ch-1 / .ch-2 / .ch-3) */
+    --ch1-dark:  #1D4E7A;   /* OSAHS — clinical blue */
+    --ch1-mid:   #2B72B5;
+    --ch1-pale:  #E0EBF5;
+    --ch1-paler: #F2F7FC;
+
+    --ch2-dark:  #5C2E00;   /* OHS — warm amber */
+    --ch2-mid:   #B05F0F;
+    --ch2-pale:  #FBE8CE;
+    --ch2-paler: #FFF8F0;
+
+    --ch3-dark:  #2D1E5E;   /* COPD-overlap — deep purple */
+    --ch3-mid:   #5B3FA6;
+    --ch3-pale:  #E5DEF5;
+    --ch3-paler: #F5F2FC;
+
+    --ch-info-dark: #14554F;  /* Patient information — teal */
+    --ch-info-mid:  #2B8076;
+    --ch-info-pale: #DBEDE9;
+
+    /* Semantic — only for genuine warnings/safety, not routine recommendations */
+    --warn-bg:    #FFF8E1;
+    --warn-mid:   #C77700;
+    --warn-text:  #6B3F00;
+    --danger-bg:  #FEEFEC;
+    --danger-mid: #C42E2E;
+    --danger-text:#7A1D1D;
+    --info-bg:    #EAF2FB;
+    --info-mid:   #2D6CB7;
+    --info-text:  #1A3F6E;
+    --ok-bg:      #E9F5EE;
+    --ok-mid:     #1F7A47;
+    --ok-text:    #0F4524;
+
+    /* Type */
+    --serif:  "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono:   ui-monospace, SFMono-Regular, "JetBrains Mono", "Roboto Mono", monospace;
+
+    /* Scale (16px base) */
+    --fs-xs:  12px;
+    --fs-sm:  13px;
+    --fs-base:15px;
+    --fs-md:  17px;
+    --fs-lg:  20px;
+    --fs-xl:  26px;
+    --fs-2xl: 32px;
+    --fs-3xl: 44px;
+
+    /* Spacing — 4pt grid */
+    --s-1:  4px;
+    --s-2:  8px;
+    --s-3:  12px;
+    --s-4:  16px;
+    --s-5:  24px;
+    --s-6:  32px;
+    --s-7:  48px;
+    --s-8:  64px;
+
+    /* Curves & timing */
+    --ease: cubic-bezier(0.32, 0.72, 0, 1);
+    --t-fast: 150ms;
+    --t-mid:  250ms;
+    --t-slow: 400ms;
+}
+
+/* ----- Page ----- */
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--fs-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ----- Document header ----- */
+.document-header {
+    background: linear-gradient(135deg, #1A2B3F 0%, #243A52 60%, #2D4866 100%);
+    color: white;
+    padding: var(--s-7) var(--s-6) var(--s-6);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+.document-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+}
+.document-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 60px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+}
+
+.document-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--s-3);
+    color: rgba(255,255,255,0.92);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+.document-eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #5BB4D0;
+}
+
+.document-title {
+    font-family: var(--serif);
+    font-size: var(--fs-2xl);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: var(--s-2);
+    text-transform: none;
+    max-width: 30ch;
+    text-wrap: balance;
+    position: relative;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.document-subtitle {
+    font-family: var(--sans);
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    color: rgba(255,255,255,0.78);
+    text-transform: none;
+    letter-spacing: 0.01em;
+    margin: 0 auto var(--s-4) auto;
+    max-width: none;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.document-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s-2) var(--s-5);
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    position: relative;
+    z-index: 1;
+}
+.document-meta span { display: inline-flex; align-items: center; gap: var(--s-1); }
+.document-meta span + span::before {
+    content: '·';
+    color: #5BB4D0;
+    margin-right: var(--s-2);
+}
+
+/* ----- Alert bar (deprecated in v1.3 — do NOT emit; styles retained only for legacy outputs) ----- */
+.alert-bar {
+    background: var(--danger-text);
+    color: #FCD7D7;
+    padding: var(--s-2) var(--s-5);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    display: flex;
+    gap: var(--s-3);
+    align-items: flex-start;
+    border-left: 4px solid var(--danger-mid);
+}
+.alert-bar strong { color: white; }
+.alert-bar .alert-icon {
+    flex-shrink: 0;
+    font-size: 14px;
+    margin-top: 1px;
+}
+
+/* ----- Disclaimer (placed at bottom of document, just before footer; centre-aligned) ----- */
+.disclaimer-callout {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-mid);
+    border-right: 4px solid var(--warn-mid);
+    padding: var(--s-3) var(--s-5);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    color: var(--warn-text);
+    display: flex;
+    justify-content: center;
+    gap: var(--s-3);
+    align-items: flex-start;
+    text-align: center;
+}
+.disclaimer-callout > div { max-width: 760px; }
+.disclaimer-callout-title {
+    font-weight: 600;
+    margin-bottom: var(--s-1);
+    color: var(--warn-text);
+}
+.disclaimer-callout p { margin: 0 0 var(--s-1) 0; color: inherit; font-size: inherit; line-height: inherit; }
+.disclaimer-callout p:last-child { margin-bottom: 0; }
+.disclaimer-callout a { color: var(--warn-text); text-decoration: underline; font-weight: 500; }
+
+/* ----- Definitions band (3-card grid below disclaimer) ----- */
+.definitions-band {
+    background: var(--paper-deep);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: var(--s-5) var(--s-6);
+}
+.definitions-band-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-3);
+}
+.definitions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-3);
+}
+.def-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent-mid);
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+}
+.def-card.ch-1 { border-left-color: var(--ch1-mid); }
+.def-card.ch-2 { border-left-color: var(--ch2-mid); }
+.def-card.ch-3 { border-left-color: var(--ch3-mid); }
+.def-card h4 {
+    font-family: var(--sans);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: var(--s-1);
+}
+.def-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* ----- Layout: main column + sticky right rail ----- */
+.layout-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: var(--s-6) var(--s-6);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--s-7);
+    align-items: start;
+}
+
+@media (max-width: 1079px) {
+    .layout-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s-5);
+    }
+}
+
+.main-col { min-width: 0; }
+.main-col > main { display: contents; }
+
+/* ----- Right rail (sticky) ----- */
+.rail {
+    position: sticky;
+    top: var(--s-5);
+    align-self: start;
+    max-height: calc(100vh - var(--s-7));
+    overflow-y: auto;
+    font-size: var(--fs-sm);
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-strong) transparent;
+}
+.rail::-webkit-scrollbar { width: 5px; }
+.rail::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 3px; }
+
+@media (max-width: 1023px) {
+    .rail { position: static; max-height: none; overflow: visible; margin-top: var(--s-5); }
+}
+
+.rail-block {
+    margin-bottom: var(--s-5);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: var(--s-3) var(--s-4);
+}
+
+.rail-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-bottom: var(--s-2);
+    margin-bottom: var(--s-2);
+    border-bottom: 1px solid var(--rule);
+}
+
+/* ----- ToC (in rail) ----- */
+.toc-container {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+.toc-title { display: none; }
+.toc-grid { display: flex; flex-direction: column; gap: 1px; }
+.toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    padding: 5px 6px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    border-radius: 3px;
+    line-height: 1.35;
+    transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+    border-left: 2px solid transparent;
+}
+.toc-item:hover { background: var(--paper-edge); color: var(--ink); }
+.toc-item.is-active {
+    background: var(--accent-paler);
+    color: var(--ink);
+    font-weight: 500;
+    border-left-color: var(--accent-mid);
+}
+.toc-item.is-active.ch-1 { background: var(--ch1-paler); border-left-color: var(--ch1-mid); }
+.toc-item.is-active.ch-2 { background: var(--ch2-paler); border-left-color: var(--ch2-mid); }
+.toc-item.is-active.ch-3 { background: var(--ch3-paler); border-left-color: var(--ch3-mid); }
+.toc-item a { color: inherit; text-decoration: none; flex: 1; }
+.toc-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    background: transparent;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    flex: 0 0 24px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.toc-item.ch-1 .toc-number { color: var(--ch1-mid); }
+.toc-item.ch-2 .toc-number { color: var(--ch2-mid); }
+.toc-item.ch-3 .toc-number { color: var(--ch3-mid); }
+
+/* ----- Key thresholds card (in rail) -----
+   Default layout is a flowing two-column grid where the dt (term) and its dd (definition)
+   sit side-by-side. If a dt is genuinely too long to share a row (e.g. "0 men / 1 women + age <65"),
+   wrap it with class="dt-wide" — the dd will then drop onto its own line beneath the term. */
+.thresholds-card dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 3px var(--s-3);
+}
+.thresholds-card dl + h5 { margin-top: var(--s-3); }
+.thresholds-card h5 {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-2);
+}
+.thresholds-card dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-mid);
+    font-weight: 600;
+    white-space: nowrap;
+}
+.thresholds-card dd { color: var(--ink-soft); font-size: 12px; line-height: 1.4; }
+/* Long-term rows: dt takes a full row, dd takes the next full row (stacked). */
+.thresholds-card dt.dt-wide { grid-column: 1 / -1; }
+.thresholds-card dt.dt-wide + dd { grid-column: 1 / -1; padding-left: var(--s-3); margin-top: -2px; margin-bottom: 2px; }
+
+/* ----- Chapter divider (full-width, conditional) ----- */
+.chapter-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin: var(--s-7) 0 var(--s-5) 0;
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--rule);
+}
+.chapter-divider:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+.chapter-divider .chapter-label {
+    white-space: nowrap;
+    font-family: var(--serif);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 22px;
+    color: white;
+    background: var(--accent);
+}
+.chapter-divider .chapter-line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+}
+.chapter-divider.ch-1 .chapter-label { background: var(--ch1-dark); }
+.chapter-divider.ch-1 .chapter-line { background: linear-gradient(90deg, var(--ch1-mid) 0%, transparent 80%); }
+.chapter-divider.ch-2 .chapter-label { background: var(--ch2-dark); }
+.chapter-divider.ch-2 .chapter-line { background: linear-gradient(90deg, var(--ch2-mid) 0%, transparent 80%); }
+.chapter-divider.ch-3 .chapter-label { background: var(--ch3-dark); }
+.chapter-divider.ch-3 .chapter-line { background: linear-gradient(90deg, var(--ch3-mid) 0%, transparent 80%); }
+.chapter-divider.ch-info .chapter-label { background: var(--ch-info-dark); }
+.chapter-divider.ch-info .chapter-line { background: linear-gradient(90deg, var(--ch-info-mid) 0%, transparent 80%); }
+
+/* ----- Section card ----- */
+.section {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    margin-bottom: var(--s-4);
+    background: var(--paper);
+    overflow: hidden;
+    scroll-margin-top: var(--s-5);
+}
+
+.section-header {
+    background: var(--accent);
+    color: white;
+    padding: var(--s-3) var(--s-4);
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    cursor: pointer;
+    user-select: none;
+    transition: filter var(--t-fast) var(--ease);
+}
+.section-header:hover { filter: brightness(1.06); }
+.section-header:active { filter: brightness(0.98); }
+
+.section.ch-1 .section-header { background: var(--ch1-mid); }
+.section.ch-2 .section-header { background: var(--ch2-mid); }
+.section.ch-3 .section-header { background: var(--ch3-mid); }
+.section.ch-info .section-header { background: var(--ch-info-mid); }
+
+.section-number {
+    background: rgba(255,255,255,0.18);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.section-title {
+    font-family: var(--serif);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    line-height: 1.2;
+    flex: 1;
+    letter-spacing: -0.005em;
+}
+
+/* Collapsible behaviour */
+.chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform var(--t-mid) var(--ease);
+    opacity: 0.85;
+    color: white;
+}
+.section.collapsed .chevron { transform: rotate(-90deg); }
+
+.section-content {
+    padding: var(--s-4) var(--s-5);
+    background: var(--paper);
+    overflow: hidden;
+    transition: max-height var(--t-slow) var(--ease), opacity var(--t-mid) var(--ease), padding var(--t-mid) var(--ease);
+    max-height: 9999px;
+    opacity: 1;
+}
+.section.collapsed .section-content {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* ----- Subsection ----- */
+.subsection { margin: var(--s-4) 0; max-width: 72ch; }
+.subsection:first-child { margin-top: 0; }
+.subsection:last-child { margin-bottom: 0; }
+
+.subsection-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-2);
+    padding-bottom: var(--s-1);
+    border-bottom: 1px solid var(--rule);
+}
+.section.ch-1 .subsection-title { color: var(--ch1-dark); border-bottom-color: var(--ch1-pale); }
+.section.ch-2 .subsection-title { color: var(--ch2-dark); border-bottom-color: var(--ch2-pale); }
+.section.ch-3 .subsection-title { color: var(--ch3-dark); border-bottom-color: var(--ch3-pale); }
+.section.ch-info .subsection-title { color: var(--ch-info-dark); border-bottom-color: var(--ch-info-pale); }
+
+h4 {
+    font-family: var(--sans);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--s-3) 0 var(--s-1) 0;
+}
+
+/* ----- Body prose ----- */
+p {
+    font-size: var(--fs-base);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: var(--s-2) 0;
+    max-width: 72ch;
+    text-wrap: pretty;
+}
+strong { font-weight: 600; color: var(--ink); }
+em { font-style: italic; color: var(--ink-soft); }
+
+ul, ol {
+    margin: var(--s-2) 0 var(--s-3);
+    padding-left: var(--s-5);
+    max-width: 72ch;
+    color: var(--ink-soft);
+}
+li { margin: 4px 0; line-height: 1.6; }
+
+/* Stylish bullet lists */
+ul.bullet-list { list-style: none; padding-left: 0; }
+ul.bullet-list > li {
+    padding-left: var(--s-4);
+    position: relative;
+}
+ul.bullet-list > li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0.7em;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--rule-strong);
+}
+.section.ch-1 ul.bullet-list > li::before { background: var(--ch1-mid); }
+.section.ch-2 ul.bullet-list > li::before { background: var(--ch2-mid); }
+.section.ch-3 ul.bullet-list > li::before { background: var(--ch3-mid); }
+.section.ch-info ul.bullet-list > li::before { background: var(--ch-info-mid); }
+
+ul.bullet-list ul { margin: var(--s-1) 0 0; padding-left: var(--s-4); }
+ul.bullet-list ul li::before {
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    width: 4px; height: 4px;
+}
+
+ul.bullet-list.checkmark > li::before {
+    content: "✓";
+    background: transparent;
+    color: var(--ok-mid);
+    font-weight: 700;
+    font-size: 13px;
+    width: auto; height: auto;
+    top: 2px; left: 0;
+    border-radius: 0;
+}
+ul.bullet-list.cross > li::before {
+    content: "✗";
+    background: transparent;
+    color: var(--danger-mid);
+    font-weight: 700;
+    font-size: 13px;
+    width: auto; height: auto;
+    top: 2px; left: 0;
+    border-radius: 0;
+}
+
+/* Checklist (diamond markers, used for prioritisation lists) */
+ul.checklist {
+    list-style: none;
+    padding-left: 0;
+}
+ul.checklist > li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-2);
+    margin-bottom: 5px;
+    padding-left: 0;
+}
+ul.checklist > li::before {
+    content: "◆";
+    font-size: 9px;
+    margin-top: 6px;
+    flex-shrink: 0;
+    color: var(--accent-mid);
+}
+.section.ch-1 ul.checklist > li::before { color: var(--ch1-mid); }
+.section.ch-2 ul.checklist > li::before { color: var(--ch2-mid); }
+.section.ch-3 ul.checklist > li::before { color: var(--ch3-mid); }
+
+/* ----- Anchor links ----- */
+a {
+    color: var(--accent-mid);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color var(--t-fast) var(--ease);
+}
+a:hover { color: var(--accent); }
+
+/* ===============================================================
+   INLINE RECOMMENDATION PILL (.rec) — primary recommendation marker
+   Replaces stacked recommendation-box cards for routine recs.
+   =============================================================== */
+.rec {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    border-radius: 11px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 5px;
+    vertical-align: baseline;
+    line-height: 1.5;
+    border: 1px solid;
+    white-space: nowrap;
+}
+.rec.offer    { background: var(--ok-bg);     color: var(--ok-text);     border-color: #B5DCC4; }
+.rec.consider { background: var(--info-bg);   color: var(--info-text);   border-color: #B6CDE8; }
+.rec.do-not   { background: var(--danger-bg); color: var(--danger-text); border-color: #F1B5AC; }
+.rec.caution  { background: var(--warn-bg);   color: var(--warn-text);   border-color: #EBCC8B; }
+.rec.measure  { background: #EAF2FB;          color: var(--info-text);   border-color: #B6CDE8; }
+.rec.use      { background: var(--ok-bg);     color: var(--ok-text);     border-color: #B5DCC4; }
+
+/* ===============================================================
+   INLINE THRESHOLD PILL (.threshold) — for numeric values
+   =============================================================== */
+.threshold {
+    font-family: var(--mono);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+/* ===============================================================
+   RECOMMENDATION-BOX — reserved for safety-critical DO NOTs and
+   ONE primary first-line recommendation per major decision.
+   Subtler than v1.2 — hairline + strong left rule, no big pill.
+   =============================================================== */
+.recommendation-box {
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent-mid);
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+    margin: var(--s-3) 0;
+    max-width: 72ch;
+}
+.recommendation-box.offer    { border-left-color: var(--ok-mid);     background: var(--ok-bg); }
+.recommendation-box.consider { border-left-color: var(--info-mid);   background: var(--info-bg); }
+.recommendation-box.do-not   { border-left-color: var(--danger-mid); background: var(--danger-bg); }
+.recommendation-box.caution  { border-left-color: var(--warn-mid);   background: var(--warn-bg); }
+
+.recommendation-label {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: var(--s-1);
+    color: var(--ink-faint);
+}
+.recommendation-box.offer    .recommendation-label { color: var(--ok-text); }
+.recommendation-box.consider .recommendation-label { color: var(--info-text); }
+.recommendation-box.do-not   .recommendation-label { color: var(--danger-text); }
+.recommendation-box.caution  .recommendation-label { color: var(--warn-text); }
+
+.recommendation-text {
+    font-size: var(--fs-base);
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+}
+.recommendation-text strong { color: var(--ink); font-weight: 600; }
+
+/* ===============================================================
+   CALLOUT — for cautionary context, "Be aware", framing principles
+   Always has callout-title for clarity of role.
+   =============================================================== */
+.callout {
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+    margin: var(--s-3) 0;
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    border-left: 4px solid;
+    max-width: 72ch;
+}
+.callout-info     { background: var(--info-bg);   border-color: var(--info-mid);   color: var(--info-text); }
+.callout-warning  { background: var(--warn-bg);   border-color: var(--warn-mid);   color: var(--warn-text); }
+.callout-critical { background: var(--danger-bg); border-color: var(--danger-mid); color: var(--danger-text); }
+.callout-success  { background: var(--ok-bg);     border-color: var(--ok-mid);     color: var(--ok-text); }
+.callout-caution  { background: var(--warn-bg);   border-color: var(--warn-mid);   color: var(--warn-text); }
+.callout-note     { background: var(--paper-deep);border-color: var(--rule-strong);color: var(--ink-soft); }
+
+.callout-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--s-1);
+    color: inherit;
+}
+.callout p { color: inherit; margin: var(--s-1) 0 0; font-size: inherit; }
+.callout p:first-of-type { margin-top: 0; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: inherit; font-weight: 700; }
+.callout ul, .callout ol { margin: var(--s-2) 0 0; color: inherit; }
+.callout ul.bullet-list > li::before { background: currentColor; opacity: 0.65; }
+
+/* ===============================================================
+   ALGORITHM-FLOW — sequenced decisions with arrow connectors
+   =============================================================== */
+.algorithm-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: var(--s-3) 0;
+    max-width: 72ch;
+}
+.algo-step {
+    display: flex;
+    gap: var(--s-3);
+    align-items: flex-start;
+}
+.algo-step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: white;
+    background: var(--accent-mid);
+    margin-top: 1px;
+}
+.section.ch-1 .algo-step-num { background: var(--ch1-mid); }
+.section.ch-2 .algo-step-num { background: var(--ch2-mid); }
+.section.ch-3 .algo-step-num { background: var(--ch3-mid); }
+.algo-step-content {
+    flex: 1;
+    font-size: var(--fs-base);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    padding-top: 1px;
+}
+.algo-step-content strong { color: var(--ink); }
+.algo-connector {
+    margin-left: 11px;
+    padding-left: var(--s-4);
+    border-left: 1px dashed var(--rule-strong);
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-style: italic;
+}
+.section.ch-1 .algo-connector { border-color: var(--ch1-mid); }
+.section.ch-2 .algo-connector { border-color: var(--ch2-mid); }
+.section.ch-3 .algo-connector { border-color: var(--ch3-mid); }
+
+/* ===============================================================
+   TIMELINE — for follow-up intervals, milestones, time-ordered events
+   =============================================================== */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin: var(--s-3) 0;
+    padding-left: var(--s-2);
+    max-width: 72ch;
+    position: relative;
+}
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--rule);
+    z-index: 0;
+}
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
+    position: relative;
+    z-index: 1;
+}
+.timeline-dot {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+    margin-left: 0;
+    background: var(--paper);
+    border: 2px solid var(--accent-mid);
+    box-shadow: 0 0 0 3px var(--paper);
+}
+.section.ch-1 .timeline-dot { border-color: var(--ch1-mid); }
+.section.ch-2 .timeline-dot { border-color: var(--ch2-mid); }
+.section.ch-3 .timeline-dot { border-color: var(--ch3-mid); }
+.timeline-content { flex: 1; min-width: 0; }
+.timeline-when {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+    margin-bottom: 2px;
+}
+.timeline-desc {
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+
+/* ===============================================================
+   DVLA-BOX — dedicated regulatory callout
+   =============================================================== */
+.dvla-box {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-mid);
+    border-radius: 6px;
+    padding: var(--s-3) var(--s-4);
+    margin: var(--s-3) 0;
+    font-size: var(--fs-sm);
+    max-width: 72ch;
+}
+.dvla-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--warn-text);
+    margin-bottom: var(--s-2);
+    font-size: var(--fs-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--s-1);
+    letter-spacing: 0.05em;
+}
+.dvla-title::before { content: "🚗"; font-size: 14px; }
+.dvla-row {
+    display: flex;
+    gap: var(--s-2);
+    margin-bottom: 3px;
+    align-items: baseline;
+    line-height: 1.5;
+    color: var(--warn-text);
+}
+.dvla-row:last-child { margin-bottom: 0; }
+.dvla-tag {
+    background: var(--warn-mid);
+    color: white;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+.dvla-row strong { color: var(--ink); }
+
+/* ===============================================================
+   PANEL — lightweight tinted side-headed mini-section
+   =============================================================== */
+.panel {
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: var(--s-3) 0;
+    max-width: 72ch;
+}
+.panel-header {
+    background: var(--paper-deep);
+    padding: 6px var(--s-3);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+}
+.section.ch-1 .panel-header { background: var(--ch1-paler); color: var(--ch1-dark); border-bottom-color: var(--ch1-pale); }
+.section.ch-2 .panel-header { background: var(--ch2-paler); color: var(--ch2-dark); border-bottom-color: var(--ch2-pale); }
+.section.ch-3 .panel-header { background: var(--ch3-paler); color: var(--ch3-dark); border-bottom-color: var(--ch3-pale); }
+.panel-body { padding: var(--s-3); font-size: var(--fs-sm); line-height: 1.55; color: var(--ink-soft); }
+.panel-body p { margin: var(--s-1) 0; font-size: inherit; }
+
+/* ===============================================================
+   TABLES — data-table & severity-badge
+   =============================================================== */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+    margin: var(--s-3) 0;
+    font-variant-numeric: tabular-nums;
+    max-width: 72ch;
+}
+.data-table th {
+    background: transparent;
+    color: var(--ink-faint);
+    padding: var(--s-2) var(--s-3) var(--s-2) 0;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-bottom: 2px solid var(--rule-strong);
+}
+.data-table td {
+    padding: var(--s-2) var(--s-3) var(--s-2) 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+.data-table tr:hover td { background: var(--paper-deep); }
+.data-table tr:last-child td { border-bottom: 0; }
+.data-table strong { color: var(--ink); }
+
+.severity-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 11px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.severity-badge.mild     { background: #FEF3C7; color: #6B4A00; }
+.severity-badge.moderate { background: #FED7AA; color: #6B2A00; }
+.severity-badge.severe   { background: #FECACA; color: #6B0000; }
+
+/* ===============================================================
+   PATIENT-GRID — 3-card layout for patient information
+   =============================================================== */
+.patient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-3);
+    margin: var(--s-3) 0;
+}
+.patient-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.patient-card-head {
+    background: var(--ch-info-mid);
+    color: white;
+    padding: 7px var(--s-3);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+}
+.patient-card-body { padding: var(--s-3); font-size: 13px; line-height: 1.55; }
+.patient-card-body p { font-size: 13px; margin: 0 0 var(--s-2); }
+.patient-card-body ul { padding-left: var(--s-4); margin: 0; }
+.patient-card-body li { color: var(--ink-soft); margin: 3px 0; }
+
+/* ===============================================================
+   TERMS-GRID — multi-column glossary
+   =============================================================== */
+.terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--s-3);
+    margin: var(--s-3) 0;
+}
+.term-item {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent-mid);
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+}
+.term-name {
+    font-family: var(--sans);
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 13px;
+    margin-bottom: var(--s-1);
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+}
+.term-abbr {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--ink-faint);
+    background: var(--paper-deep);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+.term-item p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* ===============================================================
+   CROSS-REF
+   =============================================================== */
+.cross-ref {
+    display: inline;
+    background: var(--accent-paler);
+    border: 1px solid var(--accent-pale);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-weight: 500;
+}
+
+/* ===============================================================
+   FOOTER
+   =============================================================== */
+.document-footer {
+    background: #1A2B3F;
+    color: rgba(255,255,255,0.72);
+    padding: var(--s-5) var(--s-6);
+    margin-top: var(--s-6);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--s-5);
+    align-items: start;
+    font-size: 12px;
+    line-height: 1.55;
+}
+.document-footer .source-ref strong { color: white; font-size: 13px; display: block; margin-bottom: 4px; }
+.document-footer .nice-notice {
+    text-align: right;
+    max-width: 320px;
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    line-height: 1.5;
+}
+/* .yellow-card removed in v1.3 (May 2026) — Yellow Card pill is no longer emitted in the footer */
+
+@media (max-width: 768px) {
+    .document-footer { grid-template-columns: 1fr; }
+    .document-footer .nice-notice { text-align: left; max-width: none; }
+}
+
+/* ===============================================================
+   PRINT
+   =============================================================== */
+@page { size: A4; margin: 1.5cm; }
+@media print {
+    body { background: white; color: black; }
+    .layout-grid { display: block; max-width: none; padding: 0; }
+    .rail, .chevron { display: none !important; }
+    .section { page-break-inside: avoid; border: 0; box-shadow: none; }
+    .section-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .section.collapsed .section-content { max-height: none; opacity: 1; padding: var(--s-4); }
+    .alert-bar, .disclaimer-callout, .definitions-band, .document-header, .document-footer {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* ===============================================================
+   REDUCED MOTION
+   =============================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<header class="document-header">
+    <div class="document-eyebrow"><span class="dot"></span>NICE Guideline NG128 · Published 1 May 2019 · Last updated 13 April 2022</div>
+    <h1 class="document-title">Stroke and TIA in Over 16s</h1>
+    <p class="document-subtitle">Clinical revision summary for healthcare professionals and students</p>
+    <div class="document-meta">
+        <span>Specialty: Stroke Medicine · Neurology · Emergency Medicine</span>
+        <span>Age group: &gt; 16 years</span>
+        <span>Source: www.nice.org.uk/guidance/ng128</span>
+    </div>
+</header>
+
+<div class="definitions-band">
+    <div class="definitions-band-title">Three Presentations at a Glance</div>
+    <div class="definitions-grid">
+        <div class="def-card ch-1">
+            <h4>TIA</h4>
+            <p>Transient ischaemic attack. <strong>Aspirin 300 mg immediately</strong>, specialist assessment <strong>within 24 h</strong>. <strong>Do NOT</strong> use CT routinely or ABCD2 scoring. Consider MRI same-day in the TIA clinic. Carotid endarterectomy if symptomatic stenosis 50–99% NASCET (or 70–99% ECST).</p>
+        </div>
+        <div class="def-card ch-2">
+            <h4>Acute ischaemic stroke</h4>
+            <p><strong>Thrombolysis</strong> (alteplase or tenecteplase) within 4.5 h; <strong>thrombectomy</strong> within 6 h proximal anterior, or 6–24 h with limited infarct core. <strong>Aspirin 300 mg</strong> for 2 weeks once ICH excluded.</p>
+        </div>
+        <div class="def-card ch-3">
+            <h4>Haemorrhagic stroke (ICH)</h4>
+            <p>Rapid <strong>BP lowering</strong> (target ≤140 mmHg systolic) if within 6 h and SBP 150–220 mmHg, in absence of exclusion criteria. Reverse warfarin with <strong>PCC + IV vitamin K</strong>. Surgery only in selected indications.</p>
+        </div>
+    </div>
+</div>
+
+<div class="layout-grid">
+
+<div class="main-col">
+<main>
+
+<section class="section" id="overview">
+    <div class="section-header">
+        <span class="section-number">1</span>
+        <h2 class="section-title">Overview &amp; Scope</h2>
+    </div>
+    <div class="section-content">
+        <p>This guideline covers <strong>interventions in the acute stage of a stroke or TIA</strong> in people aged <strong>&gt; 16</strong>. It offers the best clinical advice on <strong>diagnosis and acute management within the first <span class="threshold">48 hours</span></strong> after onset of symptoms.</p>
+
+        <p>NG128 replaces CG68 and is the basis of <span class="cross-ref">QS2</span>. Three parallel clinical presentations — <strong>TIA</strong>, <strong>acute ischaemic stroke</strong>, and <strong>haemorrhagic stroke (intracerebral haemorrhage)</strong> — are managed in this single guideline. Long-term rehabilitation is covered separately.</p>
+    </div>
+</section>
+
+<section class="section" id="rapid-recognition">
+    <div class="section-header">
+        <span class="section-number">2</span>
+        <h2 class="section-title">Rapid Recognition &amp; Initial TIA Management</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Recognition tools</h3>
+            <div class="algorithm-flow">
+                <div class="algo-step">
+                    <span class="algo-step-num">1</span>
+                    <div class="algo-step-content">Outside hospital: <span class="rec use">USE</span> a validated tool such as <strong>FAST (Face Arm Speech Test)</strong> to screen people with sudden onset of neurological symptoms.</div>
+                </div>
+                <div class="algo-step">
+                    <span class="algo-step-num">2</span>
+                    <div class="algo-step-content"><strong>Exclude hypoglycaemia</strong> as a cause of sudden onset of neurological symptoms.</div>
+                </div>
+                <div class="algo-step">
+                    <span class="algo-step-num">3</span>
+                    <div class="algo-step-content">In the emergency department: <span class="rec use">USE</span> a validated tool such as <strong>ROSIER (Recognition of Stroke in the Emergency Room)</strong> to establish the diagnosis rapidly.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Initial management of suspected/confirmed TIA</h3>
+            <div class="recommendation-box offer">
+                <span class="recommendation-label">IMMEDIATE</span>
+                <p class="recommendation-text"><span class="rec offer">OFFER</span> <strong>aspirin <span class="threshold">300 mg daily</span></strong> (unless contraindicated) to people with suspected TIA, started <strong>immediately</strong>. <span class="rec offer">REFER</span> immediately for <strong>specialist assessment and investigation within <span class="threshold">24 h</span></strong> of symptom onset. <span class="rec offer">OFFER</span> <strong>secondary prevention</strong> in addition to aspirin as soon as the TIA diagnosis is confirmed.</p>
+            </div>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Use scoring systems such as <strong>ABCD2</strong> to assess risk of subsequent stroke or to inform urgency of referral for people with suspected or confirmed TIA.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="imaging">
+    <div class="section-header">
+        <span class="section-number">3</span>
+        <h2 class="section-title">Imaging — Suspected TIA / Non-Disabling Stroke</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="recommendation-box do-not">
+            <span class="recommendation-label">DO NOT</span>
+            <p class="recommendation-text">Offer <strong>CT brain scanning</strong> to people with a suspected TIA <strong>unless</strong> there is clinical suspicion of an alternative diagnosis that CT could detect.</p>
+        </div>
+
+        <ul class="bullet-list">
+            <li>After specialist assessment in the TIA clinic, <span class="rec consider">CONSIDER</span> <strong>MRI</strong> (including <strong>diffusion-weighted and blood-sensitive sequences</strong>) to determine the territory of ischaemia or to detect haemorrhage or alternative pathologies. <strong>If MRI is done, perform it on the same day as the assessment.</strong></li>
+        </ul>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Carotid imaging &amp; endarterectomy decision</h3>
+            <p>Everyone with TIA who, after specialist assessment, is a candidate for carotid endarterectomy should have <strong>urgent carotid imaging</strong>. Carotid imaging reports must <strong>clearly state which criteria (NASCET or ECST)</strong> were used.</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr><th>Symptomatic carotid stenosis</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>NASCET <span class="threshold">50–99%</span></strong><br>or <strong>ECST <span class="threshold">70–99%</span></strong></td>
+                        <td><strong>Urgent referral for carotid endarterectomy</strong> + best medical treatment (BP control, antiplatelet, cholesterol lowering, lifestyle)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NASCET <span class="threshold">&lt; 50%</span></strong><br>or <strong>ECST <span class="threshold">&lt; 70%</span></strong></td>
+                        <td><strong>DO NOT operate</strong> — best medical treatment only</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="specialist-care">
+    <div class="section-header">
+        <span class="section-number">4</span>
+        <h2 class="section-title">Specialist Care &amp; Brain Imaging in Acute Stroke</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="recommendation-box offer">
+            <span class="recommendation-label">DIRECT ADMISSION</span>
+            <p class="recommendation-text"><strong>Admit everyone with suspected stroke DIRECTLY to a specialist acute stroke unit</strong> after initial assessment — from the community, emergency department or outpatient clinics. An acute stroke unit = a discrete area staffed by a specialist stroke MDT with monitoring/rehabilitation equipment, with regular MDT goal-setting meetings.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Immediate non-enhanced CT — indications</h3>
+            <p><span class="rec offer">PERFORM</span> brain imaging <strong>immediately</strong> (<strong>within <span class="threshold">1 hour</span></strong>) with a <strong>non-enhanced CT</strong> if <strong>any</strong> of:</p>
+            <ul class="checklist">
+                <li><strong>Indications for thrombolysis or thrombectomy</strong></li>
+                <li><strong>On anticoagulant treatment</strong></li>
+                <li><strong>A known bleeding tendency</strong></li>
+                <li><strong>Depressed level of consciousness</strong> (GCS <span class="threshold">&lt; 13</span>)</li>
+                <li><strong>Unexplained progressive or fluctuating symptoms</strong></li>
+                <li><strong>Papilloedema, neck stiffness or fever</strong></li>
+                <li><strong>Severe headache at onset</strong> of stroke symptoms</li>
+            </ul>
+
+            <ul class="bullet-list">
+                <li>If <strong>thrombectomy might be indicated</strong>: perform <strong>CT contrast angiography</strong> following the initial non-enhanced CT.</li>
+                <li><strong>Add CT perfusion imaging</strong> (or MR equivalent) if thrombectomy might be indicated <strong>beyond 6 hours</strong> of symptom onset.</li>
+                <li>Without immediate-imaging indications: scan <strong>as soon as possible and within <span class="threshold">24 hours</span></strong> of symptom onset.</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="thrombolysis">
+    <div class="section-header">
+        <span class="section-number">5</span>
+        <h2 class="section-title">Thrombolysis — Acute Ischaemic Stroke</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="recommendation-box offer">
+            <span class="recommendation-label">OFFER</span>
+            <p class="recommendation-text"><strong>Thrombolysis with alteplase (TA264, 2012) or tenecteplase (TA990, 2024)</strong> for acute ischaemic stroke <strong>within <span class="threshold">4.5 hours</span> of symptom onset</strong>, when intracranial haemorrhage has been excluded.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="thrombectomy">
+    <div class="section-header">
+        <span class="section-number">6</span>
+        <h2 class="section-title">Thrombectomy — Acute Ischaemic Stroke</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Thrombectomy decision pathway</h3>
+            <div class="algorithm-flow">
+                <div class="algo-step">
+                    <span class="algo-step-num">1</span>
+                    <div class="algo-step-content"><strong>≤ <span class="threshold">6 h</span> symptom onset</strong> + acute ischaemic stroke + <strong>confirmed proximal anterior circulation occlusion</strong> on CTA/MRA → <span class="rec offer">OFFER THROMBECTOMY</span> as soon as possible, with IV thrombolysis if not contraindicated and within licensed window.</div>
+                </div>
+                <div class="algo-step">
+                    <span class="algo-step-num">2</span>
+                    <div class="algo-step-content"><strong>Last known to be well between <span class="threshold">6 and 24 h</span></strong> (including wake-up strokes) + proximal anterior circulation occlusion + <strong>potential to salvage brain tissue</strong> (CT perfusion or DWI showing limited infarct core) → <span class="rec offer">OFFER THROMBECTOMY</span>.</div>
+                </div>
+                <div class="algo-step">
+                    <span class="algo-step-num">3</span>
+                    <div class="algo-step-content"><strong>Up to <span class="threshold">24 h</span></strong> from last known well + <strong>proximal posterior circulation occlusion</strong> (basilar or posterior cerebral artery) + potential to salvage brain tissue → <span class="rec consider">CONSIDER THROMBECTOMY</span> + IV thrombolysis where appropriate.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Patient-selection criteria for thrombectomy</h3>
+            <ul class="checklist">
+                <li><strong>Pre-stroke functional status: modified Rankin scale (mRS) <span class="threshold">&lt; 3</span></strong></li>
+                <li><strong>NIHSS score <span class="threshold">&gt; 5</span></strong></li>
+            </ul>
+            <div class="callout callout-note">
+                <div class="callout-title">Off-label device note (May 2019)</div>
+                <p>Not all devices with a CE mark for thrombectomy were intended by the manufacturer for use as recommended here. Follow professional guidance, take full responsibility, obtain informed consent. MHRA: use CE-marked devices for their intended purpose where possible.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="antithrombotics">
+    <div class="section-header">
+        <span class="section-number">7</span>
+        <h2 class="section-title">Aspirin, Anticoagulation &amp; Statins</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Aspirin for acute ischaemic stroke</h3>
+            <div class="recommendation-box offer">
+                <span class="recommendation-label">OFFER (within 24 h, ICH excluded)</span>
+                <p class="recommendation-text">Offer <strong>aspirin <span class="threshold">300 mg</span></strong> as soon as possible (within 24 h) once intracerebral haemorrhage is excluded by brain imaging:</p>
+            </div>
+            <ul class="bullet-list">
+                <li><strong>Aspirin 300 mg orally</strong> if no dysphagia</li>
+                <li><strong>Aspirin 300 mg rectally or by enteral tube</strong> if dysphagia</li>
+                <li><strong>Continue daily 300 mg for <span class="threshold">2 weeks</span></strong>, then start definitive long-term antithrombotic treatment (or earlier if discharging before 2 weeks)</li>
+                <li>Add a <strong>PPI</strong> if previous dyspepsia associated with aspirin</li>
+                <li>Offer an <strong>alternative antiplatelet</strong> if allergic or genuinely intolerant of aspirin</li>
+            </ul>
+
+            <div class="callout callout-note">
+                <div class="callout-title">Aspirin intolerance — definition</div>
+                <p>Either <strong>proven hypersensitivity</strong> to aspirin-containing medicines, OR a <strong>history of severe dyspepsia</strong> induced by low-dose aspirin.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Anticoagulation — by clinical context</h3>
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT (routine)</span>
+                <p class="recommendation-text">Routinely use <strong>anticoagulation treatment</strong> for acute stroke. (There may be a subgroup at higher VTE risk than haemorrhagic-transformation risk — <strong>complete leg paralysis, previous VTE, dehydration, malignancy, current/recent smoker</strong> — kept under regular review if given prophylactic anticoagulation.)</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr><th>Scenario</th><th>Treatment</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cerebral venous sinus thrombosis</strong> (incl. with secondary cerebral haemorrhage)</td>
+                        <td><strong>Full-dose anticoagulation</strong> — initial full-dose heparin then warfarin (<strong>INR 2–3</strong>)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stroke from arterial dissection</strong></td>
+                        <td><strong>Anticoagulants OR antiplatelet agents</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Antiphospholipid syndrome</strong> + acute ischaemic stroke</td>
+                        <td>Same as <strong>acute ischaemic stroke without APS</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Disabling ischaemic stroke + AF</strong></td>
+                        <td><strong>Aspirin 300 mg for first 2 weeks</strong> before anticoagulation considered</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prosthetic valves + disabling cerebral infarction at risk of haemorrhagic transformation</strong></td>
+                        <td><strong>Stop anticoagulation for 1 week</strong> + substitute <strong>aspirin 300 mg</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ischaemic stroke + symptomatic proximal DVT/PE</strong></td>
+                        <td><strong>Anticoagulation</strong> (preferred over aspirin) unless contraindications</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Haemorrhagic stroke + symptomatic DVT/PE</strong></td>
+                        <td><strong>Anticoagulation OR caval filter</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Reversal of anticoagulation in haemorrhagic stroke</h3>
+            <div class="recommendation-box offer">
+                <span class="recommendation-label">WARFARIN REVERSAL</span>
+                <p class="recommendation-text"><strong>Return clotting levels to normal as soon as possible</strong> in primary intracerebral haemorrhage on warfarin (elevated INR) — use a combination of <strong>prothrombin complex concentrate (PCC) + IV vitamin K</strong>.</p>
+            </div>
+            <p>For <strong>DOAC reversal</strong>, see the <span class="cross-ref">MHRA safety advice on DOACs</span> for a list of reversal agents.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Statins</h3>
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT (immediate)</span>
+                <p class="recommendation-text"><strong>Immediate initiation of statin treatment is not recommended</strong> in acute stroke. (Committee consensus: safe to start statins after <strong>48 hours</strong>.) <strong>Continue</strong> statin treatment in people already receiving statins.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="homeostasis">
+    <div class="section-header">
+        <span class="section-number">8</span>
+        <h2 class="section-title">Maintenance / Restoration of Homeostasis</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Supplemental oxygen</h3>
+            <ul class="bullet-list">
+                <li><span class="rec offer">GIVE</span> supplemental oxygen <strong>only if oxygen saturation drops below <span class="threshold">95%</span></strong>. <strong>Routine oxygen is NOT recommended</strong> in acute stroke patients who are not hypoxic.</li>
+            </ul>
+            <div class="callout callout-warning">
+                <div class="callout-title">Pulse oximeter accuracy</div>
+                <p>Some pulse oximeters can <strong>underestimate or overestimate oxygen saturation</strong>, especially borderline values. <strong>Overestimation has been reported in people with dark skin.</strong> See the NHS England Patient Safety Alert on the risk of harm from inappropriate placement of pulse oximeter probes.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Blood sugar control</h3>
+            <ul class="bullet-list">
+                <li>Maintain <strong>blood glucose <span class="threshold">4–11 mmol/L</span></strong> in people with acute stroke.</li>
+                <li>Provide <strong>optimal insulin therapy</strong> (achievable with IV insulin and glucose) to all adults with <strong>type 1 diabetes</strong> with threatened or actual stroke. Critical care and ED should have a protocol.</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">BP control — acute intracerebral haemorrhage</h3>
+            <div class="algorithm-flow">
+                <div class="algo-step">
+                    <span class="algo-step-num">1</span>
+                    <div class="algo-step-content"><strong>Within <span class="threshold">6 h</span></strong> of symptom onset + <strong>systolic BP <span class="threshold">150–220 mmHg</span></strong> + no exclusions → <span class="rec consider">CONSIDER RAPID BP LOWERING</span>.</div>
+                </div>
+                <div class="algo-step">
+                    <span class="algo-step-num">2</span>
+                    <div class="algo-step-content"><strong>Beyond 6 h</strong> OR <strong>systolic &gt; 220 mmHg</strong> + no exclusions → <span class="rec consider">CONSIDER</span> on a <strong>case-by-case basis</strong> taking into account risk of harm.</div>
+                </div>
+                <div class="algo-step">
+                    <span class="algo-step-num">3</span>
+                    <div class="algo-step-content"><strong>Target: systolic BP <span class="threshold">≤ 140 mmHg</span></strong>, ensuring the <strong>magnitude drop does not exceed <span class="threshold">60 mmHg in 1 hour</span></strong> of starting treatment.</div>
+                </div>
+            </div>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">EXCLUSIONS — DO NOT lower BP rapidly</span>
+                <p class="recommendation-text">Do not rapidly lower BP in people who:</p>
+            </div>
+            <ul class="bullet-list cross">
+                <li>Have an <strong>underlying structural cause</strong> (e.g. tumour, AVM, aneurysm)</li>
+                <li>Have a <strong>Glasgow Coma Scale score below 6</strong></li>
+                <li>Are going to have <strong>early neurosurgery to evacuate the haematoma</strong></li>
+                <li>Have a <strong>massive haematoma with a poor expected prognosis</strong></li>
+            </ul>
+            <p>For <strong>young people aged 16 or 17</strong> with acute intracerebral haemorrhage (no exclusions), <strong>seek advice from a paediatric specialist</strong> when considering BP lowering.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">BP control — acute ischaemic stroke</h3>
+            <p><strong>Anti-hypertensive treatment is recommended ONLY in a hypertensive emergency</strong> with one or more of:</p>
+            <ul class="bullet-list">
+                <li>Hypertensive <strong>encephalopathy</strong></li>
+                <li>Hypertensive <strong>nephropathy</strong></li>
+                <li>Hypertensive <strong>cardiac failure / myocardial infarction</strong></li>
+                <li><strong>Aortic dissection</strong></li>
+                <li><strong>Pre-eclampsia / eclampsia</strong></li>
+            </ul>
+            <p>BP reduction to <strong><span class="threshold">≤ 185/110 mmHg</span></strong> should be considered in people who are <strong>candidates for IV thrombolysis</strong>.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="nutrition">
+    <div class="section-header">
+        <span class="section-number">9</span>
+        <h2 class="section-title">Nutrition &amp; Hydration</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Swallowing assessment pathway</h3>
+            <div class="algorithm-flow">
+                <div class="algo-step">
+                    <span class="algo-step-num">1</span>
+                    <div class="algo-step-content"><strong>On admission</strong>: screen swallowing by an appropriately trained healthcare professional <strong>before any oral food, fluid or medication</strong>.</div>
+                </div>
+                <div class="algo-connector">→ Problems identified:</div>
+                <div class="algo-step">
+                    <span class="algo-step-num">2</span>
+                    <div class="algo-step-content"><strong>Specialist assessment of swallowing</strong> — preferably <strong>within <span class="threshold">24 h</span></strong> of admission, and <strong>not more than <span class="threshold">72 h</span></strong> afterwards.</div>
+                </div>
+                <div class="algo-connector">→ Suspected aspiration OR tube feeding/modification ≥ 3 days:</div>
+                <div class="algo-step">
+                    <span class="algo-step-num">3</span>
+                    <div class="algo-step-content"><strong>Re-assess + consider instrumental examination</strong>, and refer for dietary advice.</div>
+                </div>
+                <div class="algo-connector">→ Unable to take adequate oral intake:</div>
+                <div class="algo-step">
+                    <span class="algo-step-num">4</span>
+                    <div class="algo-step-content"><strong>NG tube within <span class="threshold">24 h</span></strong> of admission <strong>unless they have had thrombolysis</strong>. <strong>Consider nasal bridle tube or gastrostomy</strong> if unable to tolerate NG. Refer for detailed nutritional assessment; review oral medication formulation/route.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Malnutrition screening</h3>
+            <ul class="bullet-list">
+                <li><strong>Screen all hospital inpatients on admission</strong> for malnutrition risk; <strong>repeat weekly</strong> for inpatients.</li>
+                <li>Screening should assess <strong>BMI</strong> and <strong>% unintentional weight loss</strong>; consider time over which intake has been reduced and likelihood of future impaired intake. <strong>MUST (Malnutrition Universal Screening Tool)</strong> may be used.</li>
+                <li>Be aware that <strong>dysphagia, poor oral health and reduced ability to self-feed</strong> will affect nutrition.</li>
+            </ul>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT (routine)</span>
+                <p class="recommendation-text">Routine nutritional supplementation is <strong>not recommended for people with acute stroke who are adequately nourished on admission</strong>.</p>
+            </div>
+
+            <p><span class="rec offer">START</span> nutrition support for people at risk of malnutrition — oral nutritional supplements, specialist dietary advice and/or tube feeding.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Hydration</h3>
+            <p>Assess on admission; <strong>review hydration regularly</strong>; manage so that normal hydration is maintained.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="positioning-mobilisation">
+    <div class="section-header">
+        <span class="section-number">10</span>
+        <h2 class="section-title">Positioning &amp; Early Mobilisation</h2>
+    </div>
+    <div class="section-content">
+
+        <ul class="bullet-list">
+            <li>Assess <strong>individual clinical needs and personal preferences</strong> to determine optimal head position — comfort, physical/cognitive abilities, postural control.</li>
+            <li><span class="rec offer">HELP</span> people <strong>sit out of bed, stand or walk as soon as their clinical condition permits</strong>, as part of an active management programme in a specialist stroke unit.</li>
+        </ul>
+
+        <div class="recommendation-box do-not">
+            <span class="recommendation-label">DO NOT (first 24 h)</span>
+            <p class="recommendation-text">If people need help to sit out of bed, stand or walk, <strong>do NOT offer high-intensity mobilisation in the first <span class="threshold">24 h</span></strong> after symptom onset. ('High-intensity mobilisation' = the AVERT-trial intervention: ≥ 3 additional out-of-bed sessions vs usual care, focused on sitting/standing/walking, beginning within 24 h.)</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="aspiration">
+    <div class="section-header">
+        <span class="section-number">11</span>
+        <h2 class="section-title">Avoiding Aspiration Pneumonia</h2>
+    </div>
+    <div class="section-content">
+        <p>To avoid aspiration pneumonia, give food, fluids and medication to people with <strong>dysphagia in a form that can be swallowed without aspiration</strong>, after specialist assessment of swallowing.</p>
+    </div>
+</section>
+
+<section class="section" id="surgery">
+    <div class="section-header">
+        <span class="section-number">12</span>
+        <h2 class="section-title">Surgery — Haemorrhage &amp; Decompressive Hemicraniectomy</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Acute intracerebral haemorrhage</h3>
+            <ul class="bullet-list">
+                <li>Stroke services should agree <strong>protocols for monitoring, referring and transferring</strong> people to regional neurosurgical centres for the management of <strong>symptomatic hydrocephalus</strong>.</li>
+                <li>Monitor people with intracerebral haemorrhage by specialists in neurosurgical or stroke care for <strong>deterioration in function</strong>; refer immediately for brain imaging when necessary.</li>
+                <li><strong>Previously fit people</strong> should be considered for surgical intervention following primary intracerebral haemorrhage <strong>if they have hydrocephalus</strong>.</li>
+            </ul>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">RARELY REQUIRE SURGERY</span>
+                <p class="recommendation-text">People with any of the following rarely require surgical intervention and should receive medical treatment initially:</p>
+            </div>
+            <ul class="bullet-list cross">
+                <li>Small deep haemorrhages</li>
+                <li>Lobar haemorrhage without either hydrocephalus or rapid neurological deterioration</li>
+                <li>A large haemorrhage and significant comorbidities before the stroke</li>
+                <li><strong>GCS below 8</strong>, unless this is because of hydrocephalus</li>
+                <li>Posterior fossa haemorrhage</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Decompressive hemicraniectomy</h3>
+            <div class="recommendation-box offer">
+                <span class="recommendation-label">CONSIDER (within 48 h)</span>
+                <p class="recommendation-text"><span class="rec consider">CONSIDER</span> <strong>decompressive hemicraniectomy</strong> (performed <strong>within <span class="threshold">48 h</span></strong> of symptom onset) for people who meet <strong>ALL</strong> the following:</p>
+            </div>
+            <ul class="checklist">
+                <li>Clinical deficits suggesting <strong>infarction in the MCA territory</strong>, with <strong>NIHSS &gt; <span class="threshold">15</span></strong></li>
+                <li><strong>Decreased level of consciousness</strong>: NIHSS item 1a score <strong>≥ 1</strong></li>
+                <li>CT signs of an infarct involving <strong>≥ <span class="threshold">50%</span> of the MCA territory</strong> — with or without additional infarction in the anterior or posterior cerebral artery on the same side — OR <strong>infarct volume &gt; <span class="threshold">145 cm³</span> on diffusion-weighted MRI</strong></li>
+            </ul>
+            <p>Discuss risks and benefits with people or their family members/carers, taking into account their <strong>functional status before the stroke</strong> and their wishes/preferences. NICE has produced patient decision aids on decompressive hemicraniectomy. People referred for decompressive hemicraniectomy should be <strong>monitored by appropriately trained professionals skilled in neurological assessment</strong>.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="terms">
+    <div class="section-header">
+        <span class="section-number">13</span>
+        <h2 class="section-title">Terms Used in This Guideline</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="terms-grid">
+            <div class="term-item">
+                <div class="term-name">High-intensity mobilisation</div>
+                <p>Refers to the very early mobilisation intervention from the <strong>AVERT trial</strong>. Includes mobilisation that <strong>begins within the first 24 hours</strong> of stroke onset, includes at least <strong>3 additional out-of-bed sessions</strong> compared with usual care, and focuses on <strong>sitting, standing and walking</strong> (i.e. out-of-bed) activity.</p>
+            </div>
+            <div class="term-item">
+                <div class="term-name">Aspirin intolerance</div>
+                <p>Either <strong>proven hypersensitivity</strong> to aspirin-containing medicines, OR a <strong>history of severe dyspepsia</strong> induced by low-dose aspirin.</p>
+            </div>
+            <div class="term-item">
+                <div class="term-name">"Immediately" (for imaging — 1.3.2)</div>
+                <p>'<strong>Ideally the next slot and definitely within 1 hour, whichever is sooner</strong>'.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+</main>
+</div><!-- end .main-col -->
+
+<aside class="rail">
+    <div class="rail-block">
+        <div class="rail-label">Contents</div>
+        <nav class="toc-container">
+            <div class="toc-grid">
+                <div class="toc-item"><span class="toc-number">1</span><a href="#overview">Overview &amp; Scope</a></div>
+                <div class="toc-item"><span class="toc-number">2</span><a href="#rapid-recognition">Rapid Recognition &amp; TIA</a></div>
+                <div class="toc-item"><span class="toc-number">3</span><a href="#imaging">Imaging — TIA / Non-Disabling</a></div>
+                <div class="toc-item"><span class="toc-number">4</span><a href="#specialist-care">Specialist Care &amp; Brain Imaging</a></div>
+                <div class="toc-item"><span class="toc-number">5</span><a href="#thrombolysis">Thrombolysis</a></div>
+                <div class="toc-item"><span class="toc-number">6</span><a href="#thrombectomy">Thrombectomy</a></div>
+                <div class="toc-item"><span class="toc-number">7</span><a href="#antithrombotics">Aspirin, Anticoagulation, Statins</a></div>
+                <div class="toc-item"><span class="toc-number">8</span><a href="#homeostasis">Homeostasis</a></div>
+                <div class="toc-item"><span class="toc-number">9</span><a href="#nutrition">Nutrition &amp; Hydration</a></div>
+                <div class="toc-item"><span class="toc-number">10</span><a href="#positioning-mobilisation">Positioning &amp; Mobilisation</a></div>
+                <div class="toc-item"><span class="toc-number">11</span><a href="#aspiration">Aspiration Pneumonia</a></div>
+                <div class="toc-item"><span class="toc-number">12</span><a href="#surgery">Surgery</a></div>
+                <div class="toc-item"><span class="toc-number">13</span><a href="#terms">Terms Used</a></div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="rail-block thresholds-card">
+        <div class="rail-label">Key Thresholds</div>
+
+        <h5>TIA initial management</h5>
+        <dl>
+            <dt>Aspirin loading</dt><dd>300 mg daily, immediate</dd>
+            <dt>Specialist assessment</dt><dd>Within 24 h</dd>
+        </dl>
+
+        <h5>Carotid endarterectomy criteria</h5>
+        <dl>
+            <dt class="dt-wide">NASCET 50–99% OR ECST 70–99%</dt><dd>Urgent endarterectomy</dd>
+            <dt class="dt-wide">NASCET &lt; 50% OR ECST &lt; 70%</dt><dd>No surgery; medical treatment only</dd>
+        </dl>
+
+        <h5>Brain imaging timing</h5>
+        <dl>
+            <dt>"Immediately"</dt><dd>Next slot, ≤ 1 h</dd>
+            <dt>Standard imaging</dt><dd>Within 24 h</dd>
+            <dt>GCS for immediate imaging</dt><dd>&lt; 13</dd>
+        </dl>
+
+        <h5>Thrombolysis &amp; thrombectomy windows</h5>
+        <dl>
+            <dt>Thrombolysis</dt><dd>≤ 4.5 h symptom onset</dd>
+            <dt>Thrombectomy — anterior</dt><dd>≤ 6 h (offer)</dd>
+            <dt>Thrombectomy — anterior + salvage</dt><dd>6–24 h (offer)</dd>
+            <dt>Thrombectomy — posterior</dt><dd>Up to 24 h (consider)</dd>
+        </dl>
+
+        <h5>Thrombectomy patient selection</h5>
+        <dl>
+            <dt>Pre-stroke mRS</dt><dd>&lt; 3</dd>
+            <dt>NIHSS</dt><dd>&gt; 5</dd>
+        </dl>
+
+        <h5>Aspirin (ischaemic stroke)</h5>
+        <dl>
+            <dt>Loading</dt><dd>300 mg, within 24 h (ICH excluded)</dd>
+            <dt>Duration</dt><dd>2 weeks → long-term antithrombotic</dd>
+        </dl>
+
+        <h5>Special anticoagulation scenarios</h5>
+        <dl>
+            <dt>CVST</dt><dd>Heparin → warfarin INR 2–3</dd>
+            <dt class="dt-wide">Disabling ischaemic + AF</dt><dd>Aspirin 300 mg × 2 weeks first</dd>
+            <dt class="dt-wide">Prosthetic valve + haemorrhagic transformation risk</dt><dd>Stop anticoag 1 week; aspirin 300 mg</dd>
+        </dl>
+
+        <h5>Statin timing</h5>
+        <dl>
+            <dt>Immediate statin start</dt><dd>Not recommended</dd>
+            <dt>Committee consensus</dt><dd>Safe after 48 h</dd>
+        </dl>
+
+        <h5>Homeostasis</h5>
+        <dl>
+            <dt>O₂ threshold</dt><dd>SpO₂ &lt; 95%</dd>
+            <dt>Glucose target</dt><dd>4–11 mmol/L</dd>
+        </dl>
+
+        <h5>BP control — intracerebral haemorrhage</h5>
+        <dl>
+            <dt>Within 6 h + SBP 150–220</dt><dd>Consider rapid lowering</dd>
+            <dt>SBP target</dt><dd>≤ 140 mmHg</dd>
+            <dt>Maximum drop in 1 h</dt><dd>≤ 60 mmHg</dd>
+            <dt>GCS exclusion for BP lowering</dt><dd>&lt; 6</dd>
+        </dl>
+
+        <h5>BP control — ischaemic stroke</h5>
+        <dl>
+            <dt class="dt-wide">Thrombolysis candidate target</dt><dd>≤ 185/110 mmHg</dd>
+        </dl>
+
+        <h5>Nutrition &amp; mobilisation</h5>
+        <dl>
+            <dt>Specialist swallowing assessment</dt><dd>Within 24 h, ≤ 72 h</dd>
+            <dt>NG tube</dt><dd>Within 24 h (unless thrombolysis)</dd>
+            <dt class="dt-wide">High-intensity mobilisation</dt><dd>NOT in first 24 h</dd>
+        </dl>
+
+        <h5>Decompressive hemicraniectomy</h5>
+        <dl>
+            <dt>Performance window</dt><dd>Within 48 h symptom onset</dd>
+            <dt>NIHSS</dt><dd>&gt; 15</dd>
+            <dt>NIHSS item 1a</dt><dd>≥ 1 (LOC)</dd>
+            <dt>MCA infarct territory</dt><dd>≥ 50%</dd>
+            <dt>DWI infarct volume</dt><dd>&gt; 145 cm³</dd>
+        </dl>
+
+        <h5>Surgical exclusion — ICH</h5>
+        <dl>
+            <dt>GCS</dt><dd>&lt; 8 (unless hydrocephalus)</dd>
+        </dl>
+    </div>
+</aside>
+
+</div><!-- end .layout-grid -->
+
+<div class="disclaimer-callout">
+    <div>
+        <div class="disclaimer-callout-title">⚠️ Disclaimer</div>
+        <p>This enhanced summary is derived from <strong>NICE Guideline NG128 on Stroke and transient ischaemic attack in over 16s: diagnosis and initial management</strong>. Intended as a clinical reference/revision tool and does not replace the full guideline recommendations.</p>
+        <p>For the complete guideline visit: <a href="https://www.nice.org.uk/guidance/ng128">www.nice.org.uk/guidance/ng128</a></p>
+    </div>
+</div>
+
+<footer class="document-footer">
+    <div class="source-ref">
+        <strong>Source Guideline</strong>
+        NICE Guideline NG128 — Stroke and transient ischaemic attack in over 16s: diagnosis and initial management. Published 1 May 2019. Last updated 13 April 2022. Replaces CG68. Basis of QS2.<br>
+        Available at: www.nice.org.uk/guidance/ng128
+    </div>
+    <div class="nice-notice">
+        © NICE 2019 Stroke and transient ischaemic attack in over 16s: diagnosis and initial management. All rights reserved. Subject to Notice of rights. NICE guidance is prepared for the National Health Service in England. All NICE guidance is accurate at the time of publication and is subject to regular review and may be updated or withdrawn. NICE accepts no responsibility for the use of its content in this product/publication.
+    </div>
+</footer>
+
+<script>
+/* ===============================================================
+   MediGuide — Canonical Design System JS
+   ---------------------------------------------------------------
+   - Collapsible sections (chevron toggle, first open by default)
+   - ToC anchor expansion (clicking ToC entry expands target)
+   - Scrollspy (active ToC item highlights as you scroll)
+   - Reduced-motion respect
+   - All structure must already exist in the HTML emitted by Stage 3.
+   =============================================================== */
+
+(function () {
+    'use strict';
+
+    function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+    function $$(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
+
+    /* -------- 1. Collapsible sections -------- */
+    function setupCollapsibles() {
+        $$('.section').forEach(function (section, idx) {
+            var header = $('.section-header', section);
+            if (!header) return;
+
+            // Add chevron SVG if not already present
+            if (!$('.chevron', header)) {
+                var ns = 'http://www.w3.org/2000/svg';
+                var svg = document.createElementNS(ns, 'svg');
+                svg.setAttribute('class', 'chevron');
+                svg.setAttribute('viewBox', '0 0 16 16');
+                svg.setAttribute('fill', 'none');
+                svg.setAttribute('stroke', 'currentColor');
+                svg.setAttribute('stroke-width', '2.4');
+                svg.setAttribute('stroke-linecap', 'round');
+                svg.setAttribute('stroke-linejoin', 'round');
+                var poly = document.createElementNS(ns, 'polyline');
+                poly.setAttribute('points', '4,6 8,10 12,6');
+                svg.appendChild(poly);
+                header.appendChild(svg);
+            }
+
+            // Collapse all except the first section
+            if (idx > 0) section.classList.add('collapsed');
+
+            header.setAttribute('role', 'button');
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('aria-expanded', section.classList.contains('collapsed') ? 'false' : 'true');
+
+            function toggle() {
+                section.classList.toggle('collapsed');
+                header.setAttribute('aria-expanded', section.classList.contains('collapsed') ? 'false' : 'true');
+            }
+
+            header.addEventListener('click', toggle);
+            header.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle();
+                }
+            });
+        });
+    }
+
+    /* -------- 2. ToC anchor expansion -------- */
+    function setupTocClickExpand() {
+        $$('.toc-item a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var id = (link.getAttribute('href') || '').slice(1);
+                var target = document.getElementById(id);
+                if (target && target.classList.contains('collapsed')) {
+                    target.classList.remove('collapsed');
+                    var hdr = $('.section-header', target);
+                    if (hdr) hdr.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    }
+
+    /* -------- 3. Scrollspy: highlight active ToC entry -------- */
+    function setupScrollspy() {
+        var tocLinks = $$('.toc-item a');
+        if (!tocLinks.length) return;
+
+        var sectionToTocItem = new Map();
+        tocLinks.forEach(function (a) {
+            var id = a.getAttribute('href') || '';
+            var target = document.querySelector(id);
+            if (target) sectionToTocItem.set(target, a.closest('.toc-item'));
+        });
+
+        if (!('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var item = sectionToTocItem.get(entry.target);
+                if (!item) return;
+                if (entry.isIntersecting && entry.intersectionRatio > 0) {
+                    item.dataset.intersecting = '1';
+                } else {
+                    delete item.dataset.intersecting;
+                }
+            });
+
+            $$('.toc-item').forEach(function (i) { i.classList.remove('is-active'); });
+            var visible = $$('.toc-item[data-intersecting="1"]');
+            if (visible.length) visible[0].classList.add('is-active');
+        }, {
+            rootMargin: '-15% 0px -75% 0px',
+            threshold: [0, 0.1]
+        });
+
+        sectionToTocItem.forEach(function (item, target) {
+            observer.observe(target);
+        });
+    }
+
+    /* -------- Init -------- */
+    function init() {
+        setupCollapsibles();
+        setupTocClickExpand();
+        setupScrollspy();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+</body>
+</html>
