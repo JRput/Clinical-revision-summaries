@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atrial Fibrillation: Diagnosis and Management — Clinical Summary</title>
+    <style>
+/* ===============================================================
+   MediGuide — Canonical Design System
+   ===============================================================
+   Educational clinical reference for healthcare professionals
+   and medical students. Single accent palette per chapter when
+   the source has multiple parallel sub-conditions; otherwise
+   navy-default. Reading is single-column main + sticky right
+   rail. Recommendation pills are inline by default; full cards
+   reserved for critical DO NOTs and primary first-line.
+   =============================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ----- Reset ----- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ----- Tokens ----- */
+:root {
+    /* Neutrals */
+    --paper:        #FFFFFF;
+    --paper-deep:   #F8F7F4;
+    --paper-edge:   #F0EEE8;
+    --ink:          #1A1F2B;
+    --ink-soft:     #2E3340;
+    --ink-muted:    #5C6371;
+    --ink-faint:    #8E939E;
+    --rule:         #E5E7EB;
+    --rule-strong:  #CBD0D9;
+
+    /* Default chapter palette (used when only one chapter, or as fallback) */
+    --accent:       #1A4F70;
+    --accent-mid:   #2A6F95;
+    --accent-pale:  #E1ECF3;
+    --accent-paler: #F2F7FB;
+
+    /* Chapter palettes (applied via .ch-osahs / .ch-ohs / .ch-copd / .ch-1 / .ch-2 / .ch-3) */
+    --ch1-dark:  #1D4E7A;   /* OSAHS — clinical blue */
+    --ch1-mid:   #2B72B5;
+    --ch1-pale:  #E0EBF5;
+    --ch1-paler: #F2F7FC;
+
+    --ch2-dark:  #5C2E00;   /* OHS — warm amber */
+    --ch2-mid:   #B05F0F;
+    --ch2-pale:  #FBE8CE;
+    --ch2-paler: #FFF8F0;
+
+    --ch3-dark:  #2D1E5E;   /* COPD-overlap — deep purple */
+    --ch3-mid:   #5B3FA6;
+    --ch3-pale:  #E5DEF5;
+    --ch3-paler: #F5F2FC;
+
+    --ch-info-dark: #14554F;  /* Patient information — teal */
+    --ch-info-mid:  #2B8076;
+    --ch-info-pale: #DBEDE9;
+
+    /* Semantic — only for genuine warnings/safety, not routine recommendations */
+    --warn-bg:    #FFF8E1;
+    --warn-mid:   #C77700;
+    --warn-text:  #6B3F00;
+    --danger-bg:  #FEEFEC;
+    --danger-mid: #C42E2E;
+    --danger-text:#7A1D1D;
+    --info-bg:    #EAF2FB;
+    --info-mid:   #2D6CB7;
+    --info-text:  #1A3F6E;
+    --ok-bg:      #E9F5EE;
+    --ok-mid:     #1F7A47;
+    --ok-text:    #0F4524;
+
+    /* Type */
+    --serif:  "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono:   ui-monospace, SFMono-Regular, "JetBrains Mono", "Roboto Mono", monospace;
+
+    /* Scale (16px base) */
+    --fs-xs:  12px;
+    --fs-sm:  13px;
+    --fs-base:15px;
+    --fs-md:  17px;
+    --fs-lg:  20px;
+    --fs-xl:  26px;
+    --fs-2xl: 32px;
+    --fs-3xl: 44px;
+
+    /* Spacing — 4pt grid */
+    --s-1:  4px;
+    --s-2:  8px;
+    --s-3:  12px;
+    --s-4:  16px;
+    --s-5:  24px;
+    --s-6:  32px;
+    --s-7:  48px;
+    --s-8:  64px;
+
+    /* Curves & timing */
+    --ease: cubic-bezier(0.32, 0.72, 0, 1);
+    --t-fast: 150ms;
+    --t-mid:  250ms;
+    --t-slow: 400ms;
+}
+
+/* ----- Page ----- */
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--fs-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ----- Document header ----- */
+.document-header {
+    background: linear-gradient(135deg, #1A2B3F 0%, #243A52 60%, #2D4866 100%);
+    color: white;
+    padding: var(--s-7) var(--s-6) var(--s-6);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+.document-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+}
+.document-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 60px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+}
+
+.document-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--s-3);
+    color: rgba(255,255,255,0.92);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+.document-eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #5BB4D0;
+}
+
+.document-title {
+    font-family: var(--serif);
+    font-size: var(--fs-2xl);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: var(--s-2);
+    text-transform: none;
+    max-width: 30ch;
+    text-wrap: balance;
+    position: relative;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.document-subtitle {
+    font-family: var(--sans);
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    color: rgba(255,255,255,0.78);
+    text-transform: none;
+    letter-spacing: 0.01em;
+    margin: 0 auto var(--s-4) auto;
+    max-width: none;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.document-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s-2) var(--s-5);
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    position: relative;
+    z-index: 1;
+}
+.document-meta span { display: inline-flex; align-items: center; gap: var(--s-1); }
+.document-meta span + span::before {
+    content: '·';
+    color: #5BB4D0;
+    margin-right: var(--s-2);
+}
+
+/* ----- Alert bar (deprecated in v1.3 — do NOT emit; styles retained only for legacy outputs) ----- */
+.alert-bar {
+    background: var(--danger-text);
+    color: #FCD7D7;
+    padding: var(--s-2) var(--s-5);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    display: flex;
+    gap: var(--s-3);
+    align-items: flex-start;
+    border-left: 4px solid var(--danger-mid);
+}
+.alert-bar strong { color: white; }
+.alert-bar .alert-icon {
+    flex-shrink: 0;
+    font-size: 14px;
+    margin-top: 1px;
+}
+
+/* ----- Disclaimer (placed at bottom of document, just before footer; centre-aligned) ----- */
+.disclaimer-callout {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-mid);
+    border-right: 4px solid var(--warn-mid);
+    padding: var(--s-3) var(--s-5);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    color: var(--warn-text);
+    display: flex;
+    justify-content: center;
+    gap: var(--s-3);
+    align-items: flex-start;
+    text-align: center;
+}
+.disclaimer-callout > div { max-width: 760px; }
+.disclaimer-callout-title {
+    font-weight: 600;
+    margin-bottom: var(--s-1);
+    color: var(--warn-text);
+}
+.disclaimer-callout p { margin: 0 0 var(--s-1) 0; color: inherit; font-size: inherit; line-height: inherit; }
+.disclaimer-callout p:last-child { margin-bottom: 0; }
+.disclaimer-callout a { color: var(--warn-text); text-decoration: underline; font-weight: 500; }
+
+/* ----- Definitions band (3-card grid below disclaimer) ----- */
+.definitions-band {
+    background: var(--paper-deep);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: var(--s-5) var(--s-6);
+}
+.definitions-band-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-3);
+}
+.definitions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-3);
+}
+.def-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent-mid);
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+}
+.def-card.ch-1 { border-left-color: var(--ch1-mid); }
+.def-card.ch-2 { border-left-color: var(--ch2-mid); }
+.def-card.ch-3 { border-left-color: var(--ch3-mid); }
+.def-card h4 {
+    font-family: var(--sans);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: var(--s-1);
+}
+.def-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* ----- Layout: main column + sticky right rail ----- */
+.layout-grid {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: var(--s-6) var(--s-6);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--s-7);
+    align-items: start;
+}
+
+@media (max-width: 1079px) {
+    .layout-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s-5);
+    }
+}
+
+.main-col { min-width: 0; }
+.main-col > main { display: contents; }
+
+/* ----- Right rail (sticky) ----- */
+.rail {
+    position: sticky;
+    top: var(--s-5);
+    align-self: start;
+    max-height: calc(100vh - var(--s-7));
+    overflow-y: auto;
+    font-size: var(--fs-sm);
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-strong) transparent;
+}
+.rail::-webkit-scrollbar { width: 5px; }
+.rail::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 3px; }
+
+@media (max-width: 1023px) {
+    .rail { position: static; max-height: none; overflow: visible; margin-top: var(--s-5); }
+}
+
+.rail-block {
+    margin-bottom: var(--s-5);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: var(--s-3) var(--s-4);
+}
+
+.rail-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-bottom: var(--s-2);
+    margin-bottom: var(--s-2);
+    border-bottom: 1px solid var(--rule);
+}
+
+/* ----- ToC (in rail) ----- */
+.toc-container {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+.toc-title { display: none; }
+.toc-grid { display: flex; flex-direction: column; gap: 1px; }
+.toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    padding: 5px 6px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    border-radius: 3px;
+    line-height: 1.35;
+    transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+    border-left: 2px solid transparent;
+}
+.toc-item:hover { background: var(--paper-edge); color: var(--ink); }
+.toc-item.is-active {
+    background: var(--accent-paler);
+    color: var(--ink);
+    font-weight: 500;
+    border-left-color: var(--accent-mid);
+}
+.toc-item.is-active.ch-1 { background: var(--ch1-paler); border-left-color: var(--ch1-mid); }
+.toc-item.is-active.ch-2 { background: var(--ch2-paler); border-left-color: var(--ch2-mid); }
+.toc-item.is-active.ch-3 { background: var(--ch3-paler); border-left-color: var(--ch3-mid); }
+.toc-item a { color: inherit; text-decoration: none; flex: 1; }
+.toc-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    background: transparent;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    flex: 0 0 24px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.toc-item.ch-1 .toc-number { color: var(--ch1-mid); }
+.toc-item.ch-2 .toc-number { color: var(--ch2-mid); }
+.toc-item.ch-3 .toc-number { color: var(--ch3-mid); }
+
+/* ----- Key thresholds card (in rail) -----
+   Default layout is a flowing two-column grid where the dt (term) and its dd (definition)
+   sit side-by-side. If a dt is genuinely too long to share a row (e.g. "0 men / 1 women + age <65"),
+   wrap it with class="dt-wide" — the dd will then drop onto its own line beneath the term. */
+.thresholds-card dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 3px var(--s-3);
+}
+.thresholds-card dl + h5 { margin-top: var(--s-3); }
+.thresholds-card h5 {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-2);
+}
+.thresholds-card dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-mid);
+    font-weight: 600;
+    white-space: nowrap;
+}
+.thresholds-card dd { color: var(--ink-soft); font-size: 12px; line-height: 1.4; }
+/* Long-term rows: dt takes a full row, dd takes the next full row (stacked). */
+.thresholds-card dt.dt-wide { grid-column: 1 / -1; }
+.thresholds-card dt.dt-wide + dd { grid-column: 1 / -1; padding-left: var(--s-3); margin-top: -2px; margin-bottom: 2px; }
+
+/* ----- Chapter divider (full-width, conditional) ----- */
+.chapter-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin: var(--s-7) 0 var(--s-5) 0;
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--rule);
+}
+.chapter-divider:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+.chapter-divider .chapter-label {
+    white-space: nowrap;
+    font-family: var(--serif);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 22px;
+    color: white;
+    background: var(--accent);
+}
+.chapter-divider .chapter-line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+}
+.chapter-divider.ch-1 .chapter-label { background: var(--ch1-dark); }
+.chapter-divider.ch-1 .chapter-line { background: linear-gradient(90deg, var(--ch1-mid) 0%, transparent 80%); }
+.chapter-divider.ch-2 .chapter-label { background: var(--ch2-dark); }
+.chapter-divider.ch-2 .chapter-line { background: linear-gradient(90deg, var(--ch2-mid) 0%, transparent 80%); }
+.chapter-divider.ch-3 .chapter-label { background: var(--ch3-dark); }
+.chapter-divider.ch-3 .chapter-line { background: linear-gradient(90deg, var(--ch3-mid) 0%, transparent 80%); }
+.chapter-divider.ch-info .chapter-label { background: var(--ch-info-dark); }
+.chapter-divider.ch-info .chapter-line { background: linear-gradient(90deg, var(--ch-info-mid) 0%, transparent 80%); }
+
+/* ----- Section card ----- */
+.section {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    margin-bottom: var(--s-4);
+    background: var(--paper);
+    overflow: hidden;
+    scroll-margin-top: var(--s-5);
+}
+
+.section-header {
+    background: var(--accent);
+    color: white;
+    padding: var(--s-3) var(--s-4);
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    cursor: pointer;
+    user-select: none;
+    transition: filter var(--t-fast) var(--ease);
+}
+.section-header:hover { filter: brightness(1.06); }
+.section-header:active { filter: brightness(0.98); }
+
+.section.ch-1 .section-header { background: var(--ch1-mid); }
+.section.ch-2 .section-header { background: var(--ch2-mid); }
+.section.ch-3 .section-header { background: var(--ch3-mid); }
+.section.ch-info .section-header { background: var(--ch-info-mid); }
+
+.section-number {
+    background: rgba(255,255,255,0.18);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.section-title {
+    font-family: var(--serif);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    line-height: 1.2;
+    flex: 1;
+    letter-spacing: -0.005em;
+}
+
+/* Collapsible behaviour */
+.chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform var(--t-mid) var(--ease);
+    opacity: 0.85;
+    color: white;
+}
+.section.collapsed .chevron { transform: rotate(-90deg); }
+
+.section-content {
+    padding: var(--s-4) var(--s-5);
+    background: var(--paper);
+    overflow: hidden;
+    transition: max-height var(--t-slow) var(--ease), opacity var(--t-mid) var(--ease), padding var(--t-mid) var(--ease);
+    max-height: 9999px;
+    opacity: 1;
+}
+.section.collapsed .section-content {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* ----- Subsection ----- */
+.subsection { margin: var(--s-4) 0; max-width: 72ch; }
+.subsection:first-child { margin-top: 0; }
+.subsection:last-child { margin-bottom: 0; }
+
+.subsection-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--s-2);
+    padding-bottom: var(--s-1);
+    border-bottom: 1px solid var(--rule);
+}
+.section.ch-1 .subsection-title { color: var(--ch1-dark); border-bottom-color: var(--ch1-pale); }
+.section.ch-2 .subsection-title { color: var(--ch2-dark); border-bottom-color: var(--ch2-pale); }
+.section.ch-3 .subsection-title { color: var(--ch3-dark); border-bottom-color: var(--ch3-pale); }
+.section.ch-info .subsection-title { color: var(--ch-info-dark); border-bottom-color: var(--ch-info-pale); }
+
+h4 {
+    font-family: var(--sans);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink);
+    margin: var(--s-3) 0 var(--s-1) 0;
+}
+
+/* ----- Body prose ----- */
+p {
+    font-size: var(--fs-base);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: var(--s-2) 0;
+    max-width: 72ch;
+    text-wrap: pretty;
+}
+strong { font-weight: 600; color: var(--ink); }
+em { font-style: italic; color: var(--ink-soft); }
+
+ul, ol {
+    margin: var(--s-2) 0 var(--s-3);
+    padding-left: var(--s-5);
+    max-width: 72ch;
+    color: var(--ink-soft);
+}
+li { margin: 4px 0; line-height: 1.6; }
+
+/* Stylish bullet lists */
+ul.bullet-list { list-style: none; padding-left: 0; }
+ul.bullet-list > li {
+    padding-left: var(--s-4);
+    position: relative;
+}
+ul.bullet-list > li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0.7em;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--rule-strong);
+}
+.section.ch-1 ul.bullet-list > li::before { background: var(--ch1-mid); }
+.section.ch-2 ul.bullet-list > li::before { background: var(--ch2-mid); }
+.section.ch-3 ul.bullet-list > li::before { background: var(--ch3-mid); }
+.section.ch-info ul.bullet-list > li::before { background: var(--ch-info-mid); }
+
+ul.bullet-list ul { margin: var(--s-1) 0 0; padding-left: var(--s-4); }
+ul.bullet-list ul li::before {
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    width: 4px; height: 4px;
+}
+
+ul.bullet-list.checkmark > li::before {
+    content: "✓";
+    background: transparent;
+    color: var(--ok-mid);
+    font-weight: 700;
+    font-size: 13px;
+    width: auto; height: auto;
+    top: 2px; left: 0;
+    border-radius: 0;
+}
+ul.bullet-list.cross > li::before {
+    content: "✗";
+    background: transparent;
+    color: var(--danger-mid);
+    font-weight: 700;
+    font-size: 13px;
+    width: auto; height: auto;
+    top: 2px; left: 0;
+    border-radius: 0;
+}
+
+/* Checklist (diamond markers, used for prioritisation lists) */
+ul.checklist {
+    list-style: none;
+    padding-left: 0;
+}
+ul.checklist > li {
+    padding-left: var(--s-4);
+    position: relative;
+    margin-bottom: 5px;
+}
+ul.checklist > li::before {
+    content: "◆";
+    position: absolute;
+    left: 4px;
+    top: 0.45em;
+    font-size: 9px;
+    color: var(--accent-mid);
+}
+.section.ch-1 ul.checklist > li::before { color: var(--ch1-mid); }
+.section.ch-2 ul.checklist > li::before { color: var(--ch2-mid); }
+.section.ch-3 ul.checklist > li::before { color: var(--ch3-mid); }
+
+/* ----- Anchor links ----- */
+a {
+    color: var(--accent-mid);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color var(--t-fast) var(--ease);
+}
+a:hover { color: var(--accent); }
+
+/* ===============================================================
+   INLINE RECOMMENDATION PILL (.rec) — primary recommendation marker
+   Replaces stacked recommendation-box cards for routine recs.
+   =============================================================== */
+.rec {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    border-radius: 11px;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 5px;
+    vertical-align: baseline;
+    line-height: 1.5;
+    border: 1px solid;
+    white-space: nowrap;
+}
+.rec.offer    { background: var(--ok-bg);     color: var(--ok-text);     border-color: #B5DCC4; }
+.rec.consider { background: var(--info-bg);   color: var(--info-text);   border-color: #B6CDE8; }
+.rec.do-not   { background: var(--danger-bg); color: var(--danger-text); border-color: #F1B5AC; }
+.rec.caution  { background: var(--warn-bg);   color: var(--warn-text);   border-color: #EBCC8B; }
+.rec.measure  { background: #EAF2FB;          color: var(--info-text);   border-color: #B6CDE8; }
+.rec.use      { background: var(--ok-bg);     color: var(--ok-text);     border-color: #B5DCC4; }
+
+/* ===============================================================
+   INLINE THRESHOLD PILL (.threshold) — for numeric values
+   =============================================================== */
+.threshold {
+    font-family: var(--mono);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+/* ===============================================================
+   RECOMMENDATION-BOX — reserved for safety-critical DO NOTs and
+   ONE primary first-line recommendation per major decision.
+   Subtler than v1.2 — hairline + strong left rule, no big pill.
+   =============================================================== */
+.recommendation-box {
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent-mid);
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+    margin: var(--s-3) 0;
+    max-width: 72ch;
+}
+.recommendation-box.offer    { border-left-color: var(--ok-mid);     background: var(--ok-bg); }
+.recommendation-box.consider { border-left-color: var(--info-mid);   background: var(--info-bg); }
+.recommendation-box.do-not   { border-left-color: var(--danger-mid); background: var(--danger-bg); }
+.recommendation-box.caution  { border-left-color: var(--warn-mid);   background: var(--warn-bg); }
+
+.recommendation-label {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: var(--s-1);
+    color: var(--ink-faint);
+}
+.recommendation-box.offer    .recommendation-label { color: var(--ok-text); }
+.recommendation-box.consider .recommendation-label { color: var(--info-text); }
+.recommendation-box.do-not   .recommendation-label { color: var(--danger-text); }
+.recommendation-box.caution  .recommendation-label { color: var(--warn-text); }
+
+.recommendation-text {
+    font-size: var(--fs-base);
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+}
+.recommendation-text strong { color: var(--ink); font-weight: 600; }
+
+/* ===============================================================
+   CALLOUT — for cautionary context, "Be aware", framing principles
+   Always has callout-title for clarity of role.
+   =============================================================== */
+.callout {
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+    margin: var(--s-3) 0;
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    border-left: 4px solid;
+    max-width: 72ch;
+}
+.callout-info     { background: var(--info-bg);   border-color: var(--info-mid);   color: var(--info-text); }
+.callout-warning  { background: var(--warn-bg);   border-color: var(--warn-mid);   color: var(--warn-text); }
+.callout-critical { background: var(--danger-bg); border-color: var(--danger-mid); color: var(--danger-text); }
+.callout-success  { background: var(--ok-bg);     border-color: var(--ok-mid);     color: var(--ok-text); }
+.callout-caution  { background: var(--warn-bg);   border-color: var(--warn-mid);   color: var(--warn-text); }
+.callout-note     { background: var(--paper-deep);border-color: var(--rule-strong);color: var(--ink-soft); }
+
+.callout-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--s-1);
+    color: inherit;
+}
+.callout p { color: inherit; margin: var(--s-1) 0 0; font-size: inherit; }
+.callout p:first-of-type { margin-top: 0; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: inherit; font-weight: 700; }
+.callout ul, .callout ol { margin: var(--s-2) 0 0; color: inherit; }
+.callout ul.bullet-list > li::before { background: currentColor; opacity: 0.65; }
+
+/* ===============================================================
+   ALGORITHM-FLOW — sequenced decisions with arrow connectors
+   =============================================================== */
+.algorithm-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: var(--s-3) 0;
+    max-width: 72ch;
+}
+.algo-step {
+    display: flex;
+    gap: var(--s-3);
+    align-items: flex-start;
+}
+.algo-step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: white;
+    background: var(--accent-mid);
+    margin-top: 1px;
+}
+.section.ch-1 .algo-step-num { background: var(--ch1-mid); }
+.section.ch-2 .algo-step-num { background: var(--ch2-mid); }
+.section.ch-3 .algo-step-num { background: var(--ch3-mid); }
+.algo-step-content {
+    flex: 1;
+    font-size: var(--fs-base);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    padding-top: 1px;
+}
+.algo-step-content strong { color: var(--ink); }
+.algo-connector {
+    margin-left: 11px;
+    padding-left: var(--s-3);
+    border-left: 3px solid var(--accent-mid);
+    font-size: 13px;
+    color: var(--ink);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: var(--s-3);
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.01em;
+    background: var(--accent-paler);
+    border-radius: 0 4px 4px 0;
+    margin-right: var(--s-5);
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.section.ch-1 .algo-connector { border-color: var(--ch1-mid); }
+.section.ch-2 .algo-connector { border-color: var(--ch2-mid); }
+.section.ch-3 .algo-connector { border-color: var(--ch3-mid); }
+
+/* ===============================================================
+   TIMELINE — for follow-up intervals, milestones, time-ordered events
+   =============================================================== */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin: var(--s-3) 0;
+    padding-left: var(--s-2);
+    max-width: 72ch;
+    position: relative;
+}
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--rule);
+    z-index: 0;
+}
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
+    position: relative;
+    z-index: 1;
+}
+.timeline-dot {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+    margin-left: 0;
+    background: var(--paper);
+    border: 2px solid var(--accent-mid);
+    box-shadow: 0 0 0 3px var(--paper);
+}
+.section.ch-1 .timeline-dot { border-color: var(--ch1-mid); }
+.section.ch-2 .timeline-dot { border-color: var(--ch2-mid); }
+.section.ch-3 .timeline-dot { border-color: var(--ch3-mid); }
+.timeline-content { flex: 1; min-width: 0; }
+.timeline-when {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+    margin-bottom: 2px;
+}
+.timeline-desc {
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+
+/* ===============================================================
+   DVLA-BOX — dedicated regulatory callout
+   =============================================================== */
+.dvla-box {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-mid);
+    border-radius: 6px;
+    padding: var(--s-3) var(--s-4);
+    margin: var(--s-3) 0;
+    font-size: var(--fs-sm);
+    max-width: 72ch;
+}
+.dvla-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--warn-text);
+    margin-bottom: var(--s-2);
+    font-size: var(--fs-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--s-1);
+    letter-spacing: 0.05em;
+}
+.dvla-title::before { content: "🚗"; font-size: 14px; }
+.dvla-row {
+    display: flex;
+    gap: var(--s-2);
+    margin-bottom: 3px;
+    align-items: baseline;
+    line-height: 1.5;
+    color: var(--warn-text);
+}
+.dvla-row:last-child { margin-bottom: 0; }
+.dvla-tag {
+    background: var(--warn-mid);
+    color: white;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+.dvla-row strong { color: var(--ink); }
+
+/* ===============================================================
+   PANEL — lightweight tinted side-headed mini-section
+   =============================================================== */
+.panel {
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: var(--s-3) 0;
+    max-width: 72ch;
+}
+.panel-header {
+    background: var(--paper-deep);
+    padding: 6px var(--s-3);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+}
+.section.ch-1 .panel-header { background: var(--ch1-paler); color: var(--ch1-dark); border-bottom-color: var(--ch1-pale); }
+.section.ch-2 .panel-header { background: var(--ch2-paler); color: var(--ch2-dark); border-bottom-color: var(--ch2-pale); }
+.section.ch-3 .panel-header { background: var(--ch3-paler); color: var(--ch3-dark); border-bottom-color: var(--ch3-pale); }
+.panel-body { padding: var(--s-3); font-size: var(--fs-sm); line-height: 1.55; color: var(--ink-soft); }
+.panel-body p { margin: var(--s-1) 0; font-size: inherit; }
+
+/* ===============================================================
+   TABLES — data-table & severity-badge
+   =============================================================== */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+    margin: var(--s-3) 0;
+    font-variant-numeric: tabular-nums;
+    max-width: 72ch;
+}
+.data-table th {
+    background: transparent;
+    color: var(--ink-faint);
+    padding: var(--s-2) var(--s-3) var(--s-2) 0;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-bottom: 2px solid var(--rule-strong);
+}
+.data-table td {
+    padding: var(--s-2) var(--s-3) var(--s-2) 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+.data-table tr:hover td { background: var(--paper-deep); }
+.data-table tr:last-child td { border-bottom: 0; }
+.data-table strong { color: var(--ink); }
+
+.severity-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 11px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.severity-badge.mild     { background: #FEF3C7; color: #6B4A00; }
+.severity-badge.moderate { background: #FED7AA; color: #6B2A00; }
+.severity-badge.severe   { background: #FECACA; color: #6B0000; }
+
+/* ===============================================================
+   PATIENT-GRID — 3-card layout for patient information
+   =============================================================== */
+.patient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-3);
+    margin: var(--s-3) 0;
+}
+.patient-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.patient-card-head {
+    background: var(--ch-info-mid);
+    color: white;
+    padding: 7px var(--s-3);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+}
+.patient-card-body { padding: var(--s-3); font-size: 13px; line-height: 1.55; }
+.patient-card-body p { font-size: 13px; margin: 0 0 var(--s-2); }
+.patient-card-body ul { padding-left: var(--s-4); margin: 0; }
+.patient-card-body li { color: var(--ink-soft); margin: 3px 0; }
+
+/* ===============================================================
+   TERMS-GRID — multi-column glossary
+   =============================================================== */
+.terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--s-3);
+    margin: var(--s-3) 0;
+}
+.term-item {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent-mid);
+    border-radius: 4px;
+    padding: var(--s-3) var(--s-4);
+}
+.term-name {
+    font-family: var(--sans);
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 13px;
+    margin-bottom: var(--s-1);
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    flex-wrap: wrap;
+}
+.term-abbr {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--ink-faint);
+    background: var(--paper-deep);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+.term-item p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* ===============================================================
+   CROSS-REF
+   =============================================================== */
+.cross-ref {
+    display: inline;
+    background: var(--accent-paler);
+    border: 1px solid var(--accent-pale);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-weight: 500;
+}
+
+/* ===============================================================
+   FOOTER
+   =============================================================== */
+.document-footer {
+    background: #1A2B3F;
+    color: rgba(255,255,255,0.72);
+    padding: var(--s-5) var(--s-6);
+    margin-top: var(--s-6);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--s-5);
+    align-items: start;
+    font-size: 12px;
+    line-height: 1.55;
+}
+.document-footer .source-ref strong { color: white; font-size: 13px; display: block; margin-bottom: 4px; }
+.document-footer .nice-notice {
+    text-align: right;
+    max-width: 320px;
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    line-height: 1.5;
+}
+/* .yellow-card removed in v1.3 (May 2026) — Yellow Card pill is no longer emitted in the footer */
+
+@media (max-width: 768px) {
+    .document-footer { grid-template-columns: 1fr; }
+    .document-footer .nice-notice { text-align: left; max-width: none; }
+}
+
+/* ===============================================================
+   PRINT
+   =============================================================== */
+@page { size: A4; margin: 1.5cm; }
+@media print {
+    body { background: white; color: black; }
+    .layout-grid { display: block; max-width: none; padding: 0; }
+    .rail, .chevron { display: none !important; }
+    .section { page-break-inside: avoid; border: 0; box-shadow: none; }
+    .section-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .section.collapsed .section-content { max-height: none; opacity: 1; padding: var(--s-4); }
+    .alert-bar, .disclaimer-callout, .definitions-band, .document-header, .document-footer {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* ===============================================================
+   REDUCED MOTION
+   =============================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<header class="document-header">
+    <div class="document-eyebrow"><span class="dot"></span>NICE Guideline NG196 · Published 27 April 2021 · Last updated 30 June 2021</div>
+    <h1 class="document-title">Atrial Fibrillation: Diagnosis and Management</h1>
+    <p class="document-subtitle">Clinical revision summary for healthcare professionals and students</p>
+    <div class="document-meta">
+        <span>Specialty: Cardiology · Arrhythmia</span>
+        <span>Age group: ≥18 years</span>
+        <span>Source: www.nice.org.uk/guidance/ng196</span>
+    </div>
+</header>
+
+<div class="layout-grid">
+
+<div class="main-col">
+<main>
+
+<section class="section" id="overview">
+    <div class="section-header">
+        <span class="section-number">1</span>
+        <h2 class="section-title">Overview &amp; Context</h2>
+    </div>
+    <div class="section-content">
+        <p><strong>Atrial fibrillation (AF)</strong> is the most common heart rhythm disorder, affecting approximately <span class="threshold">2%</span> of the adult population, and its prevalence is rising. It is responsible for approximately <span class="threshold">20%</span> of all strokes and is associated with increased mortality. Men are more commonly affected than women; prevalence rises with age, and with underlying heart disease, diabetes, obesity and hypertension.</p>
+
+        <p>This guideline (NG196, 2021) covers diagnosing and managing AF in <strong>adults aged ≥18 years</strong>, including paroxysmal, persistent and permanent AF and atrial flutter. It does <strong>not</strong> apply to people with congenital heart disease precipitating AF. NG196 replaces CG180 and is the basis of QS93. It should be read alongside <span class="cross-ref">TA275 (apixaban)</span>, <span class="cross-ref">TA249 (dabigatran)</span>, <span class="cross-ref">TA355 (edoxaban)</span>, <span class="cross-ref">TA256 (rivaroxaban)</span> and <span class="cross-ref">TA197 (dronedarone)</span>.</p>
+
+        <div class="callout callout-info">
+            <div class="callout-title">MHRA advice — warfarin during COVID-19</div>
+            <p>See MHRA advice on warfarin and other anticoagulants — monitoring of patients during the COVID-19 pandemic, including reports of supratherapeutic anticoagulation with warfarin.</p>
+        </div>
+
+        <p>The treatment aim is to <strong>prevent complications (particularly stroke) and alleviate symptoms</strong> using anticoagulants, antiarrhythmics, electrical cardioversion and catheter or surgical ablation.</p>
+    </div>
+</section>
+
+<section class="section" id="detection-diagnosis">
+    <div class="section-header">
+        <span class="section-number">2</span>
+        <h2 class="section-title">Detection &amp; Diagnosis</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">When to suspect AF</h3>
+            <p><span class="rec offer">OFFER</span> <strong>manual pulse palpation</strong> to assess for an irregular pulse in anyone presenting with any of the following:</p>
+            <ul class="bullet-list">
+                <li>breathlessness</li>
+                <li>palpitations</li>
+                <li>syncope or dizziness</li>
+                <li>chest discomfort</li>
+                <li>stroke or transient ischaemic attack</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Confirming the diagnosis</h3>
+            <div class="algorithm-flow">
+                <div class="algo-step">
+                    <span class="algo-step-num">1</span>
+                    <div class="algo-step-content"><span class="rec offer">OFFER</span> <strong>manual pulse palpation</strong> if AF is suspected.</div>
+                </div>
+                <div class="algo-connector">→ If an irregular pulse is detected:</div>
+                <div class="algo-step">
+                    <span class="algo-step-num">2</span>
+                    <div class="algo-step-content"><span class="rec offer">PERFORM</span> a <strong>12-lead ECG</strong> to make the diagnosis (with or without symptoms).</div>
+                </div>
+                <div class="algo-connector">→ If 12-lead ECG is normal but paroxysmal AF is suspected:</div>
+                <div class="algo-step">
+                    <span class="algo-step-num">3a</span>
+                    <div class="algo-step-content"><span class="rec use">USE</span> a <strong>24-hour ambulatory ECG monitor</strong> if asymptomatic episodes are suspected, or if symptomatic episodes are <span class="threshold">&lt;24 h apart</span>.</div>
+                </div>
+                <div class="algo-step">
+                    <span class="algo-step-num">3b</span>
+                    <div class="algo-step-content"><span class="rec use">USE</span> an <strong>ambulatory ECG monitor, event recorder or other ECG technology</strong> for a longer appropriate period if symptomatic episodes are <span class="threshold">&gt;24 h apart</span>.</div>
+                </div>
+            </div>
+            <div class="callout callout-note">
+                <div class="callout-title">Why 12-lead ECG?</div>
+                <p>The committee specifically chose 12-lead ECG to confirm AF in order to prevent reliance on less accurate single-lead or mobile devices. NICE has separate diagnostics guidance on lead-I ECG devices for single time-point testing in primary care.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="stroke-bleeding-risk">
+    <div class="section-header">
+        <span class="section-number">3</span>
+        <h2 class="section-title">Assessment of Stroke &amp; Bleeding Risk</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Stroke risk — CHA<sub>2</sub>DS<sub>2</sub>-VASc</h3>
+            <p><span class="rec use">USE</span> the <strong>CHA<sub>2</sub>DS<sub>2</sub>-VASc score</strong> to assess stroke risk in anyone with:</p>
+            <ul class="bullet-list">
+                <li>symptomatic or asymptomatic paroxysmal, persistent or permanent AF</li>
+                <li>atrial flutter</li>
+                <li>a continuing risk of arrhythmia recurrence after cardioversion or catheter ablation</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Bleeding risk — ORBIT</h3>
+            <p><span class="rec offer">ASSESS</span> bleeding risk both <strong>before starting anticoagulation</strong> and <strong>when reviewing people already taking it</strong>. <span class="rec use">USE</span> the <strong>ORBIT bleeding risk score</strong> — evidence shows it has higher accuracy at predicting absolute bleeding risk than other tools. Other tools may be used during a transition period until ORBIT is embedded in clinical pathways.</p>
+
+            <p>Accurate knowledge of bleeding risk supports shared decision making: it can increase patient confidence and willingness to accept treatment when risk is low, and prompt discussion of risk modification when risk is high.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Modifiable risk factors for bleeding</h3>
+            <p><span class="rec offer">OFFER</span> monitoring and support to address the following modifiable risk factors:</p>
+            <ul class="bullet-list">
+                <li><strong>Uncontrolled hypertension</strong> (see NICE NG136 on hypertension)</li>
+                <li><strong>Poor INR control</strong> in patients on vitamin K antagonists</li>
+                <li><strong>Concurrent medication</strong> — antiplatelets, SSRIs, NSAIDs</li>
+                <li><strong>Harmful alcohol consumption</strong></li>
+                <li><strong>Reversible causes of anaemia</strong></li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Discussing the results</h3>
+            <p>Discuss the results of stroke and bleeding risk assessments with the person, taking their specific comorbidities and individual preferences into account. Follow NICE on enabling patients to actively participate in their care.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="cardiac-function">
+    <div class="section-header">
+        <span class="section-number">4</span>
+        <h2 class="section-title">Assessment of Cardiac Function</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">When to perform TTE</h3>
+            <p><span class="rec offer">PERFORM</span> <strong>transthoracic echocardiography (TTE)</strong> in people with AF when:</p>
+            <ul class="bullet-list">
+                <li>a baseline echocardiogram is important for long-term management</li>
+                <li>a <strong>rhythm-control strategy that includes cardioversion</strong> (electrical or pharmacological) is being considered</li>
+                <li>there is a high risk or suspicion of underlying <strong>structural or functional heart disease</strong> (e.g. heart failure, heart murmur) that influences management — for example, choice of antiarrhythmic drug</li>
+                <li>refinement of clinical risk stratification for antithrombotic therapy is needed</li>
+            </ul>
+        </div>
+
+        <div class="recommendation-box do-not">
+            <span class="recommendation-label">DO NOT</span>
+            <p class="recommendation-text">Routinely perform TTE solely for further stroke risk stratification when the decision to start anticoagulation has already been made on appropriate clinical criteria.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">When to perform TOE</h3>
+            <p><span class="rec offer">PERFORM</span> <strong>transoesophageal echocardiography (TOE)</strong> when:</p>
+            <ul class="bullet-list">
+                <li>TTE demonstrates an abnormality (e.g. valvular heart disease) warranting further specific assessment</li>
+                <li>TTE is technically difficult/of questionable quality and cardiac abnormalities need to be excluded</li>
+                <li><strong>TOE-guided cardioversion</strong> is being considered</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="package-of-care">
+    <div class="section-header">
+        <span class="section-number">5</span>
+        <h2 class="section-title">Personalised Package of Care</h2>
+    </div>
+    <div class="section-content">
+
+        <p><span class="rec offer">OFFER</span> a <strong>personalised package of care</strong> to every person with AF. Ensure it is documented and delivered, and that it covers:</p>
+        <ul class="bullet-list checkmark">
+            <li>Stroke awareness and measures to prevent stroke</li>
+            <li>Rate control</li>
+            <li>Assessment of symptoms for rhythm control</li>
+            <li>Who to contact for advice if needed</li>
+            <li>Psychological support if needed</li>
+            <li>Up-to-date and comprehensive education and information on:
+                <ul class="bullet-list">
+                    <li>cause, effects and possible complications of AF</li>
+                    <li>management of rate and rhythm control</li>
+                    <li>anticoagulation</li>
+                    <li>practical advice on anticoagulation (see NICE on venous thromboembolic diseases)</li>
+                    <li>support networks (e.g. cardiovascular charities)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Cross-references</div>
+            <p>Follow NICE's guidelines on <strong>shared decision making</strong>, <strong>medicines adherence</strong>, and <strong>medicines optimisation</strong> to support adherence and ensure safe, effective use.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="referral">
+    <div class="section-header">
+        <span class="section-number">6</span>
+        <h2 class="section-title">Referral for Specialised Management</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="recommendation-box offer">
+            <span class="recommendation-label">REFER</span>
+            <p class="recommendation-text"><strong>Refer promptly</strong> at any stage if treatment fails to control AF symptoms and more specialised management is needed. Referral should be <strong>within <span class="threshold">4 weeks</span></strong> after the failed treatment or after recurrence of AF following cardioversion.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="stroke-prevention">
+    <div class="section-header">
+        <span class="section-number">7</span>
+        <h2 class="section-title">Stroke Prevention — Anticoagulation</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Discussing anticoagulation</h3>
+            <p>When discussing benefits and risks, use clinical risk profiles and personal preferences:</p>
+            <ul class="bullet-list">
+                <li>For <strong>most people</strong>, the benefit of anticoagulation <strong>outweighs the bleeding risk</strong>.</li>
+                <li>For people at <strong>increased bleeding risk</strong>, the benefit may not always outweigh the risk — careful monitoring of bleeding risk is important.</li>
+            </ul>
+            <p>Take any contraindications for each drug into account and follow guidance in the <strong>BNF</strong> and <strong>MHRA advice on direct-acting oral anticoagulants</strong> (in particular dosages in renal impairment, reversal agents and monitoring).</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Choosing the anticoagulant</h3>
+
+            <div class="recommendation-box offer">
+                <span class="recommendation-label">OFFER</span>
+                <p class="recommendation-text">Offer a <strong>direct-acting oral anticoagulant (DOAC)</strong> — apixaban, dabigatran, edoxaban or rivaroxaban — to anyone with AF and a <strong>CHA<sub>2</sub>DS<sub>2</sub>-VASc score <span class="threshold">≥2</span></strong>, taking the risk of bleeding into account.</p>
+            </div>
+
+            <p><span class="rec consider">CONSIDER</span> a DOAC for <strong>men with AF and CHA<sub>2</sub>DS<sub>2</sub>-VASc score <span class="threshold">= 1</span></strong>, taking bleeding risk into account.</p>
+
+            <p><span class="rec offer">OFFER</span> a <strong>vitamin K antagonist (VKA)</strong> if DOACs are contraindicated, not tolerated or not suitable.</p>
+
+            <p>For people <strong>already taking a VKA and stable</strong>, continue current medication and discuss the option of switching at their next routine appointment, taking into account their time in therapeutic range.</p>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Offer stroke prevention therapy with anticoagulation to people <strong>aged &lt;65 years</strong> with AF and no risk factors other than their sex (i.e. very low risk — CHA<sub>2</sub>DS<sub>2</sub>-VASc 0 for men or 1 for women).</p>
+            </div>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Withhold anticoagulation solely because of a person's age or their risk of falls.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">DOAC treatment options (TAs brought into the guideline)</h3>
+            <p>Each DOAC is recommended within its marketing authorisation in non-valvular AF, after informed discussion of risks and benefits compared with warfarin and the other DOACs. For people taking warfarin, consider switching taking into account their INR control.</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr><th>TA</th><th>DOAC</th><th>Risk factor criteria (need ≥1)</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>TA275</strong></td>
+                        <td><strong>Apixaban</strong></td>
+                        <td>Prior stroke/TIA · age <span class="threshold">≥75 y</span> · hypertension · diabetes mellitus · symptomatic heart failure</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TA249</strong></td>
+                        <td><strong>Dabigatran etexilate</strong></td>
+                        <td>Previous stroke/TIA/systemic embolism · <strong>LVEF <span class="threshold">&lt;40%</span></strong> · symptomatic HF <strong>NYHA ≥II</strong> · age <span class="threshold">≥75 y</span> · age <span class="threshold">≥65 y</span> + (diabetes, CAD or hypertension)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TA355</strong></td>
+                        <td><strong>Edoxaban</strong></td>
+                        <td>Congestive heart failure · hypertension · diabetes · prior stroke/TIA · age <span class="threshold">≥75 y</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TA256</strong></td>
+                        <td><strong>Rivaroxaban</strong></td>
+                        <td>Congestive heart failure · hypertension · age <span class="threshold">≥75 y</span> · diabetes mellitus · prior stroke/TIA</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Assessing VKA control — time in therapeutic range</h3>
+            <p>Calculate the person's <strong>time in therapeutic range (TTR)</strong> at each visit. When calculating TTR:</p>
+            <ul class="bullet-list">
+                <li>Use a <strong>validated method</strong> (e.g. <strong>Rosendaal method</strong> for computer-assisted dosing, or proportion of tests in range for manual dosing).</li>
+                <li><strong>Exclude</strong> measurements taken during the <strong>first <span class="threshold">6 weeks</span></strong> of treatment.</li>
+                <li>Calculate TTR over a maintenance period of <strong>at least <span class="threshold">6 months</span></strong>.</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">When to reassess anticoagulation</h3>
+            <p><span class="rec offer">REASSESS</span> anticoagulation if VKA control is poor, defined by <strong>any</strong> of the following within the past 6 months:</p>
+            <ul class="checklist">
+                <li><strong>2 INR values <span class="threshold">&gt;5</span></strong>, OR <strong>1 INR value <span class="threshold">&gt;8</span></strong></li>
+                <li><strong>2 INR values <span class="threshold">&lt;1.5</span></strong></li>
+                <li><strong>TTR <span class="threshold">&lt;65%</span></strong></li>
+            </ul>
+            <p>When reassessing, address contributing factors: cognitive function, adherence, illness, interacting drug therapy, and lifestyle (diet, alcohol). If poor control cannot be improved, evaluate alternative stroke-prevention strategies with the person.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Antiplatelets</h3>
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Offer <strong>aspirin monotherapy</strong> solely for stroke prevention in people with AF.</p>
+            </div>
+            <p>For people post-MI also requiring anticoagulation, see <span class="cross-ref">NICE NG185 on acute coronary syndromes</span> (antiplatelet therapy for people with an ongoing separate indication for anticoagulation).</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Review intervals</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-when">When age 65 reached, or new risk factor develops</div>
+                        <div class="timeline-desc">Review stroke risk in anyone <strong>not</strong> on anticoagulant — new risk factors include diabetes, heart failure, peripheral arterial disease, coronary heart disease, stroke/TIA/systemic thromboembolism.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-when">Annually</div>
+                        <div class="timeline-desc">For people <strong>not</strong> on anticoagulant because of bleeding risk: review stroke and bleeding risks every year and document.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-when">At least annually (more often if needed)</div>
+                        <div class="timeline-desc">For people <strong>on</strong> anticoagulant: review the need for, and quality of, anticoagulation. Take MHRA advice on DOACs into account (bleeding risk, renal function monitoring).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Left atrial appendage occlusion (LAAO)</h3>
+            <p><span class="rec consider">CONSIDER</span> <strong>LAAO</strong> if anticoagulation is contraindicated or not tolerated, and discuss the benefits and risks with the person. See <span class="cross-ref">NICE IPG on percutaneous occlusion of the left atrial appendage in non-valvular AF</span>.</p>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Offer LAAO as an <strong>alternative to anticoagulation</strong> unless anticoagulation is contraindicated or not tolerated.</p>
+            </div>
+        </div>
+
+        <div class="callout callout-info">
+            <div class="callout-title">VKA self-monitoring</div>
+            <p>NICE has produced diagnostics guidance on <strong>self-monitoring coagulation status using point-of-care coagulometers (CoaguChek XS system)</strong> in AF and heart valve disease.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="rate-control">
+    <div class="section-header">
+        <span class="section-number">8</span>
+        <h2 class="section-title">Rate Control (Non-acute)</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">First-line strategy</h3>
+            <div class="recommendation-box offer">
+                <span class="recommendation-label">OFFER</span>
+                <p class="recommendation-text"><strong>Rate control</strong> as the <strong>first-line treatment strategy</strong> for AF.</p>
+            </div>
+
+            <p><strong>Exceptions</strong> — rate control is <em>not</em> first-line if any of the following apply:</p>
+            <ul class="bullet-list cross">
+                <li>AF has a <strong>reversible cause</strong></li>
+                <li>Heart failure thought to be <strong>primarily caused by AF</strong></li>
+                <li><strong>New-onset AF</strong></li>
+                <li>Atrial flutter whose condition is suitable for an <strong>ablation strategy to restore sinus rhythm</strong></li>
+                <li>Rhythm control would be more suitable on <strong>clinical judgement</strong></li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Choice of rate-control monotherapy</h3>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Patient scenario</th><th>Monotherapy choice</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Default</strong> — choose based on symptoms, heart rate, comorbidities and preferences</td>
+                        <td><span class="rec offer">OFFER</span> <strong>either a standard beta-blocker</strong> (not sotalol) <strong>OR a rate-limiting calcium-channel blocker</strong> — <strong>diltiazem or verapamil</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AF + concomitant heart failure</strong></td>
+                        <td>Follow <span class="cross-ref">NICE NG106 chronic heart failure</span> — use beta-blockers; <strong>avoid calcium-channel blockers</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Non-paroxysmal AF AND sedentary</strong>, OR other rate-limiting drugs ruled out</td>
+                        <td><span class="rec consider">CONSIDER</span> <strong>digoxin monotherapy</strong>.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>If monotherapy fails to control symptoms</strong> (and symptoms are due to poor ventricular rate control): <span class="rec consider">CONSIDER</span> <strong>combination therapy with any 2 of</strong>: a beta-blocker, diltiazem, digoxin.</p>
+            <div class="callout callout-note">
+                <div class="callout-title">Off-label use (April 2021)</div>
+                <p>The use of <strong>diltiazem</strong> for rate control in AF (alone or in combination) was off-label in April 2021. See NICE's information on prescribing medicines.</p>
+            </div>
+        </div>
+
+        <div class="recommendation-box do-not">
+            <span class="recommendation-label">DO NOT</span>
+            <p class="recommendation-text">Offer <strong>amiodarone for long-term rate control</strong>. Amiodarone has serious side effects (thyroid, lung and nerve damage, many irreversible) and should only be used as an interim therapy (e.g. while waiting for cardioversion) — not usually for longer than 12 months.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="rhythm-control">
+    <div class="section-header">
+        <span class="section-number">9</span>
+        <h2 class="section-title">Rhythm Control (Non-acute)</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">When to consider rhythm control</h3>
+            <p><span class="rec consider">CONSIDER</span> pharmacological and/or electrical rhythm control for people whose symptoms <strong>continue after heart rate is controlled</strong>, or for whom a rate-control strategy has not been successful. Assess the need for long-term rhythm-control drug treatment taking into account preferences, comorbidities, treatment risks and likelihood of recurrence.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Antiarrhythmic drug therapy</h3>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Offer <strong>class 1c antiarrhythmics (flecainide, propafenone)</strong> to people with known <strong>ischaemic or structural heart disease</strong>.</p>
+            </div>
+
+            <p><span class="rec consider">CONSIDER</span> a <strong>standard beta-blocker</strong> (not sotalol) as <strong>first-line</strong> for long-term rhythm control unless contraindicated. If beta-blockers are contraindicated or unsuccessful, assess suitability of alternative drugs based on comorbidities.</p>
+
+            <p><span class="rec consider">CONSIDER</span> <strong>amiodarone</strong> for people with <strong>left ventricular impairment or heart failure</strong>.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Dronedarone (TA197) — second-line option</h3>
+            <p>Follow advice on <strong>dronedarone</strong> as a <strong>second-line option</strong> for long-term rhythm control after successful cardioversion.</p>
+
+            <div class="panel">
+                <div class="panel-header">TA197 — Dronedarone eligibility (ALL of the following)</div>
+                <div class="panel-body">
+                    <p>Paroxysmal or persistent AF not controlled by first-line therapy (usually including beta-blockers) — i.e. as second-line after alternatives considered — AND</p>
+                    <p>At least <strong>1</strong> of the following cardiovascular risk factors:</p>
+                    <ul class="bullet-list">
+                        <li>Hypertension requiring drugs of <strong>≥2 different classes</strong></li>
+                        <li>Diabetes mellitus</li>
+                        <li>Previous TIA, stroke or systemic embolism</li>
+                        <li><strong>Left atrial diameter <span class="threshold">≥50 mm</span></strong></li>
+                        <li>Age <span class="threshold">≥70 y</span></li>
+                    </ul>
+                    <p>AND <strong>no</strong> left ventricular systolic dysfunction; AND <strong>no</strong> history of, or current, heart failure.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">"No drug" and "pill-in-the-pocket" strategies</h3>
+            <p>In people with <strong>infrequent paroxysms and few symptoms</strong>, or symptoms induced by known precipitants (e.g. alcohol, caffeine), <span class="rec consider">CONSIDER</span> a <strong>'no drug treatment' strategy</strong> or a <strong>'pill-in-the-pocket' strategy</strong> (antiarrhythmic taken only when an episode starts).</p>
+
+            <div class="panel">
+                <div class="panel-header">"Pill-in-the-pocket" eligibility — ALL must apply</div>
+                <div class="panel-body">
+                    <ul class="bullet-list checkmark">
+                        <li>No history of left ventricular dysfunction, valvular or ischaemic heart disease</li>
+                        <li>History of <strong>infrequent symptomatic episodes</strong> of paroxysmal AF</li>
+                        <li>Systolic BP <strong><span class="threshold">&gt;100 mmHg</span></strong> AND resting heart rate <strong><span class="threshold">&gt;70 bpm</span></strong></li>
+                        <li>Able to understand <strong>how and when</strong> to take the medication</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Cardioversion</h3>
+
+            <div class="recommendation-box offer">
+                <span class="recommendation-label">OFFER</span>
+                <p class="recommendation-text">For AF that has persisted <strong><span class="threshold">&gt;48 hours</span></strong>, offer <strong>electrical (not pharmacological) cardioversion</strong>.</p>
+            </div>
+
+            <p><span class="rec consider">CONSIDER</span> <strong>amiodarone therapy starting <span class="threshold">4 weeks before</span> and continuing up to <span class="threshold">12 months after</span></strong> electrical cardioversion to maintain sinus rhythm; discuss benefits and risks with the person.</p>
+
+            <p>For elective cardioversion of AF <span class="threshold">&gt;48 h</span>:</p>
+            <ul class="bullet-list">
+                <li><strong>TOE-guided and conventional cardioversion</strong> are considered <strong>equally effective</strong>.</li>
+                <li><strong>TOE-guided strategy</strong> should be considered when experienced staff and appropriate facilities are available, or if a minimal period of precardioversion anticoagulation is indicated due to patient choice or bleeding risk.</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Left atrial ablation</h3>
+            <div class="algorithm-flow">
+                <div class="algo-step">
+                    <span class="algo-step-num">1</span>
+                    <div class="algo-step-content">Drug treatment unsuccessful, unsuitable or not tolerated in <strong>symptomatic paroxysmal or persistent AF</strong>.</div>
+                </div>
+                <div class="algo-connector">→ First-line ablation choice:</div>
+                <div class="algo-step">
+                    <span class="algo-step-num">2</span>
+                    <div class="algo-step-content"><span class="rec consider">CONSIDER</span> <strong>radiofrequency point-by-point ablation</strong>.</div>
+                </div>
+                <div class="algo-connector">→ If RF point-by-point is assessed as unsuitable:</div>
+                <div class="algo-step">
+                    <span class="algo-step-num">3</span>
+                    <div class="algo-step-content"><span class="rec consider">CONSIDER</span> <strong>cryoballoon ablation</strong> or <strong>laser balloon ablation</strong>.</div>
+                </div>
+            </div>
+            <p>When considering left atrial ablation, discuss risks and benefits and the person's preferences. In particular, explain that the procedure <strong>is not always effective</strong> and that <strong>symptom resolution may not be long-lasting</strong>.</p>
+
+            <p><span class="rec consider">CONSIDER</span> <strong>left atrial surgical ablation</strong> at the same time as other cardiothoracic surgery for people with symptomatic AF.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Preventing recurrence after ablation</h3>
+            <p><span class="rec consider">CONSIDER</span> <strong>antiarrhythmic drug treatment for <span class="threshold">3 months</span> after left atrial ablation</strong> to prevent recurrence, taking preferences, risks and benefits into account. <strong>Reassess the need at 3 months</strong>.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Pace and ablate strategy</h3>
+            <p><span class="rec consider">CONSIDER</span> <strong>pacing and atrioventricular (AV) node ablation</strong> for people with <strong>permanent AF</strong> with symptoms or LV dysfunction thought to be caused by high ventricular rates. Reassess symptoms and the consequent need for AV-node ablation after pacing has been carried out and drug treatment further optimised.</p>
+
+            <p><span class="rec consider">CONSIDER</span> <strong>left atrial catheter ablation BEFORE pacing and AV-node ablation</strong> for people with <strong>paroxysmal AF</strong> or heart failure caused by non-permanent (paroxysmal or persistent) AF.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="acute-presentation">
+    <div class="section-header">
+        <span class="section-number">10</span>
+        <h2 class="section-title">Acute Presentation</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="recommendation-box do-not">
+            <span class="recommendation-label">DO NOT DELAY</span>
+            <p class="recommendation-text">In people with <strong>life-threatening haemodynamic instability</strong> caused by new-onset AF, carry out <strong>emergency electrical cardioversion without delaying to achieve anticoagulation</strong>.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Rate vs rhythm control — the 48-hour rule</h3>
+            <p>For acute AF presentations <strong>without life-threatening instability</strong>, choice between rate and rhythm control depends on onset duration:</p>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Onset duration</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Onset <span class="threshold">&lt; 48 h</span></strong></td>
+                        <td><span class="rec offer">OFFER</span> either <strong>rate or rhythm control</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Onset <span class="threshold">&gt; 48 h</span> or uncertain</strong></td>
+                        <td><span class="rec offer">OFFER</span> <strong>rate control</strong>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Acute AF with decompensated heart failure</h3>
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">CAUTION</span>
+                <p class="recommendation-text">In people with AF presenting acutely with <strong>suspected concomitant acute decompensated heart failure</strong>: <strong>seek senior specialist input</strong> on the use of beta-blockers, and <strong>do not use calcium-channel blockers</strong> — they can cause further deterioration in pulmonary oedema caused by heart failure.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Pharmacological cardioversion choices</h3>
+            <p><span class="rec consider">CONSIDER</span> pharmacological or electrical cardioversion in new-onset AF when rhythm control is chosen. If pharmacological cardioversion is agreed:</p>
+            <ul class="bullet-list">
+                <li><strong>No structural or ischaemic heart disease</strong> → <span class="rec offer">OFFER</span> a choice of <strong>flecainide or amiodarone</strong>.</li>
+                <li><strong>Structural heart disease</strong> → <span class="rec offer">OFFER</span> <strong>amiodarone</strong>.</li>
+            </ul>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Offer <strong>magnesium</strong> or a <strong>calcium-channel blocker</strong> for pharmacological cardioversion.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">When to delay cardioversion</h3>
+            <p>If AF duration is <span class="threshold">&gt;48 h</span> or uncertain and long-term rhythm control is being considered, <strong>delay cardioversion until therapeutic anticoagulation has been maintained for a minimum of <span class="threshold">3 weeks</span></strong>. Offer rate control during this period.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Anticoagulation in acute AF</h3>
+            <p>In new-onset AF receiving <strong>no or subtherapeutic anticoagulation</strong>:</p>
+            <ul class="bullet-list">
+                <li>In the absence of contraindications, <span class="rec offer">OFFER</span> <strong>heparin at initial presentation</strong>.</li>
+                <li><strong>Continue heparin</strong> until a full assessment has been made and appropriate antithrombotic therapy has been started, based on risk stratification.</li>
+            </ul>
+
+            <p>In confirmed AF of <strong>recent onset (&lt;48 h)</strong>, <span class="rec offer">OFFER</span> oral anticoagulation if <strong>any</strong> of:</p>
+            <ul class="bullet-list">
+                <li>stable sinus rhythm is not successfully restored within the same 48-hour period</li>
+                <li>factors indicating a high risk of AF recurrence are present — history of failed cardioversion, structural heart disease, <strong>prolonged AF &gt;12 months</strong>, previous recurrences</li>
+                <li>it is recommended by the stroke/bleeding risk assessment</li>
+            </ul>
+
+            <p>If the precise time since onset is <strong>uncertain</strong>, offer oral anticoagulation as for persistent AF.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="stroke-and-af">
+    <div class="section-header">
+        <span class="section-number">11</span>
+        <h2 class="section-title">Initial Management of Stroke and AF</h2>
+    </div>
+    <div class="section-content">
+        <p>For initial management of stroke in a patient with AF, follow recommendation <strong>1.4.17</strong> in <span class="cross-ref">NICE NG128 on stroke and transient ischaemic attack in over 16s</span>.</p>
+    </div>
+</section>
+
+<section class="section" id="postoperative-af">
+    <div class="section-header">
+        <span class="section-number">12</span>
+        <h2 class="section-title">Postoperative AF — Prevention &amp; Management</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="subsection">
+            <h3 class="subsection-title">Preventing postoperative AF (cardiothoracic surgery)</h3>
+            <p>In people having <strong>cardiothoracic surgery</strong>, reduce the risk of postoperative AF by offering <strong>one</strong> of:</p>
+            <ul class="bullet-list checkmark">
+                <li><strong>Amiodarone</strong></li>
+                <li>A <strong>standard beta-blocker</strong> (not sotalol)</li>
+                <li>A <strong>rate-limiting calcium-channel blocker</strong> — diltiazem or verapamil</li>
+            </ul>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text">Offer <strong>digoxin</strong> for postoperative AF prevention.</p>
+            </div>
+
+            <p>People already on <strong>beta-blocker therapy</strong>: <strong>continue this treatment</strong> unless contraindications develop (e.g. postoperative bradycardia or hypotension).</p>
+
+            <div class="recommendation-box do-not">
+                <span class="recommendation-label">DO NOT</span>
+                <p class="recommendation-text"><strong>Start statins</strong> in people having cardiothoracic surgery <strong>solely</strong> to prevent postoperative AF. (People already on statins for other reasons should continue — see <span class="cross-ref">NICE on cardiovascular disease risk assessment and reduction</span>.)</p>
+            </div>
+
+            <div class="callout callout-note">
+                <div class="callout-title">Off-label use (April 2021)</div>
+                <p>The use of <strong>diltiazem</strong> for postoperative AF prevention was off-label in April 2021.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Managing new-onset postoperative AF after cardiothoracic surgery</h3>
+            <p><span class="rec consider">CONSIDER</span> <strong>either a rhythm-control or rate-control strategy</strong> for initial treatment. If <strong>rhythm control</strong> is chosen, reassess the need for antiarrhythmic drug treatment at a suitable time point — <strong>usually around <span class="threshold">6 weeks</span></strong>.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">After non-cardiothoracic surgery</h3>
+            <p>Manage postoperative AF after non-cardiothoracic surgery in the <strong>same way as new-onset AF</strong> with any other cause.</p>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Antithrombotic therapy</h3>
+            <p>In the prophylaxis and management of postoperative AF, use appropriate antithrombotic therapy and <strong>correct identifiable causes</strong> (e.g. electrolyte imbalance, hypoxia).</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="stopping-anticoagulation">
+    <div class="section-header">
+        <span class="section-number">13</span>
+        <h2 class="section-title">Stopping Anticoagulation</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="recommendation-box do-not">
+            <span class="recommendation-label">DO NOT</span>
+            <p class="recommendation-text">Stop anticoagulation <strong>solely because AF is no longer detectable</strong>. Paroxysmal AF is not always detectable, and the underlying stroke risk may persist.</p>
+        </div>
+
+        <p>Base decisions to stop anticoagulation on:</p>
+        <ul class="bullet-list checkmark">
+            <li>A <strong>reassessment of stroke and bleeding risk</strong> using <strong>CHA<sub>2</sub>DS<sub>2</sub>-VASc</strong> and <strong>ORBIT</strong></li>
+            <li>A <strong>discussion of the person's preferences</strong></li>
+        </ul>
+
+    </div>
+</section>
+
+<section class="section" id="terms">
+    <div class="section-header">
+        <span class="section-number">14</span>
+        <h2 class="section-title">Terms Used in This Guideline</h2>
+    </div>
+    <div class="section-content">
+
+        <div class="terms-grid">
+            <div class="term-item">
+                <div class="term-name">People with atrial fibrillation presenting acutely</div>
+                <p>People presenting with AF of definite recent onset, or with destabilisation of existing AF. Does NOT include AF discovered incidentally (e.g. through pulse palpation before a routine blood pressure measurement).</p>
+            </div>
+            <div class="term-item">
+                <div class="term-name">Pill-in-the-pocket strategy</div>
+                <p>The person self-manages paroxysmal AF by taking antiarrhythmic drugs <strong>only when an episode of AF starts</strong>.</p>
+            </div>
+            <div class="term-item">
+                <div class="term-name">Paroxysmal atrial fibrillation</div>
+                <p>Episodes of AF that stop within <strong>7 days, usually within 48 hours</strong>, <strong>without any treatment</strong>.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+</main>
+</div><!-- end .main-col -->
+
+<aside class="rail">
+    <div class="rail-block">
+        <div class="rail-label">Contents</div>
+        <nav class="toc-container">
+            <div class="toc-grid">
+                <div class="toc-item"><span class="toc-number">1</span><a href="#overview">Overview &amp; Context</a></div>
+                <div class="toc-item"><span class="toc-number">2</span><a href="#detection-diagnosis">Detection &amp; Diagnosis</a></div>
+                <div class="toc-item"><span class="toc-number">3</span><a href="#stroke-bleeding-risk">Stroke &amp; Bleeding Risk</a></div>
+                <div class="toc-item"><span class="toc-number">4</span><a href="#cardiac-function">Cardiac Function (TTE/TOE)</a></div>
+                <div class="toc-item"><span class="toc-number">5</span><a href="#package-of-care">Personalised Care</a></div>
+                <div class="toc-item"><span class="toc-number">6</span><a href="#referral">Referral (4-week rule)</a></div>
+                <div class="toc-item"><span class="toc-number">7</span><a href="#stroke-prevention">Stroke Prevention</a></div>
+                <div class="toc-item"><span class="toc-number">8</span><a href="#rate-control">Rate Control</a></div>
+                <div class="toc-item"><span class="toc-number">9</span><a href="#rhythm-control">Rhythm Control</a></div>
+                <div class="toc-item"><span class="toc-number">10</span><a href="#acute-presentation">Acute Presentation</a></div>
+                <div class="toc-item"><span class="toc-number">11</span><a href="#stroke-and-af">Stroke + AF</a></div>
+                <div class="toc-item"><span class="toc-number">12</span><a href="#postoperative-af">Postoperative AF</a></div>
+                <div class="toc-item"><span class="toc-number">13</span><a href="#stopping-anticoagulation">Stopping Anticoagulation</a></div>
+                <div class="toc-item"><span class="toc-number">14</span><a href="#terms">Terms Used</a></div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="rail-block thresholds-card">
+        <div class="rail-label">Key Thresholds</div>
+
+        <h5>CHA<sub>2</sub>DS<sub>2</sub>-VASc thresholds</h5>
+        <dl>
+            <dt>≥2</dt><dd>Offer DOAC</dd>
+            <dt>= 1 (men)</dt><dd>Consider DOAC</dd>
+            <dt class="dt-wide">0 men / 1 women + age &lt;65</dt><dd>Do not offer (very low risk)</dd>
+        </dl>
+
+        <h5>VKA — poor control (any of, in 6 m)</h5>
+        <dl>
+            <dt>INR &gt;5 × 2</dt><dd>Reassess</dd>
+            <dt>INR &gt;8 × 1</dt><dd>Reassess</dd>
+            <dt>INR &lt;1.5 × 2</dt><dd>Reassess</dd>
+            <dt>TTR &lt;65%</dt><dd>Reassess</dd>
+        </dl>
+
+        <h5>TTR calculation</h5>
+        <dl>
+            <dt>Method</dt><dd>Rosendaal (computer) or proportion in range (manual)</dd>
+            <dt>Exclude</dt><dd>First 6 weeks of treatment</dd>
+            <dt>Window</dt><dd>≥ 6 months maintenance</dd>
+        </dl>
+
+        <h5>Acute AF — duration cut-offs</h5>
+        <dl>
+            <dt>&lt;48 h</dt><dd>Rate OR rhythm control</dd>
+            <dt>&gt;48 h or uncertain</dt><dd>Rate control + delay cardioversion</dd>
+            <dt class="dt-wide">Pre-cardioversion</dt><dd>≥ 3 weeks therapeutic anticoagulation</dd>
+        </dl>
+
+        <h5>Pill-in-the-pocket eligibility</h5>
+        <dl>
+            <dt>Systolic BP</dt><dd>&gt; 100 mmHg</dd>
+            <dt>Resting HR</dt><dd>&gt; 70 bpm</dd>
+        </dl>
+
+        <h5>Other key numbers</h5>
+        <dl>
+            <dt>Referral</dt><dd>Within 4 weeks of failed treatment</dd>
+            <dt>Amiodarone pre-cardioversion</dt><dd>4 weeks before</dd>
+            <dt>Amiodarone post-cardioversion</dt><dd>Up to 12 months</dd>
+            <dt>Post-ablation antiarrhythmic</dt><dd>3 months, then reassess</dd>
+            <dt class="dt-wide">Postoperative rhythm-control reassessment</dt><dd>~ 6 weeks</dd>
+            <dt>Dronedarone — left atrial diameter</dt><dd>≥ 50 mm</dd>
+            <dt>Dronedarone — age threshold</dt><dd>≥ 70 y</dd>
+            <dt>Dabigatran — LVEF criterion</dt><dd>&lt; 40%</dd>
+            <dt>DOAC age criterion (all)</dt><dd>≥ 75 y</dd>
+        </dl>
+    </div>
+</aside>
+
+</div><!-- end .layout-grid -->
+
+<div class="disclaimer-callout">
+    <div>
+        <div class="disclaimer-callout-title">⚠️ Disclaimer</div>
+        <p>This enhanced summary is derived from NICE Guideline NG196 on Atrial fibrillation: diagnosis and management. Intended as a clinical reference/revision tool and does not replace the full guideline recommendations.</p>
+        <p>For the complete guideline visit: <a href="https://www.nice.org.uk/guidance/ng196">www.nice.org.uk/guidance/ng196</a></p>
+    </div>
+</div>
+
+<footer class="document-footer">
+    <div class="source-ref">
+        <strong>Source Guideline</strong>
+        NICE Guideline NG196 — Atrial fibrillation: diagnosis and management. Published 27 April 2021. Last updated 30 June 2021. Replaces CG180; basis of QS93. Incorporates TA275, TA249, TA355, TA256, TA197.<br>
+        Available at: www.nice.org.uk/guidance/ng196
+    </div>
+    <div class="nice-notice">
+        © NICE 2021 Atrial fibrillation: diagnosis and management. All rights reserved. Subject to Notice of rights. NICE guidance is prepared for the National Health Service in England. All NICE guidance is accurate at the time of publication and is subject to regular review and may be updated or withdrawn. NICE accepts no responsibility for the use of its content in this product/publication.
+    </div>
+</footer>
+
+<script>
+/* ===============================================================
+   MediGuide — Canonical Design System JS
+   ---------------------------------------------------------------
+   - Collapsible sections (chevron toggle, first open by default)
+   - ToC anchor expansion (clicking ToC entry expands target)
+   - Scrollspy (active ToC item highlights as you scroll)
+   - Reduced-motion respect
+   - All structure must already exist in the HTML emitted by Stage 3.
+   =============================================================== */
+
+(function () {
+    'use strict';
+
+    function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+    function $$(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
+
+    /* -------- 1. Collapsible sections -------- */
+    function setupCollapsibles() {
+        $$('.section').forEach(function (section, idx) {
+            var header = $('.section-header', section);
+            if (!header) return;
+
+            // Add chevron SVG if not already present
+            if (!$('.chevron', header)) {
+                var ns = 'http://www.w3.org/2000/svg';
+                var svg = document.createElementNS(ns, 'svg');
+                svg.setAttribute('class', 'chevron');
+                svg.setAttribute('viewBox', '0 0 16 16');
+                svg.setAttribute('fill', 'none');
+                svg.setAttribute('stroke', 'currentColor');
+                svg.setAttribute('stroke-width', '2.4');
+                svg.setAttribute('stroke-linecap', 'round');
+                svg.setAttribute('stroke-linejoin', 'round');
+                var poly = document.createElementNS(ns, 'polyline');
+                poly.setAttribute('points', '4,6 8,10 12,6');
+                svg.appendChild(poly);
+                header.appendChild(svg);
+            }
+
+            // Collapse all except the first section
+            if (idx > 0) section.classList.add('collapsed');
+
+            header.setAttribute('role', 'button');
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('aria-expanded', section.classList.contains('collapsed') ? 'false' : 'true');
+
+            function toggle() {
+                section.classList.toggle('collapsed');
+                header.setAttribute('aria-expanded', section.classList.contains('collapsed') ? 'false' : 'true');
+            }
+
+            header.addEventListener('click', toggle);
+            header.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle();
+                }
+            });
+        });
+    }
+
+    /* -------- 2. ToC anchor expansion -------- */
+    function setupTocClickExpand() {
+        $$('.toc-item a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var id = (link.getAttribute('href') || '').slice(1);
+                var target = document.getElementById(id);
+                if (target && target.classList.contains('collapsed')) {
+                    target.classList.remove('collapsed');
+                    var hdr = $('.section-header', target);
+                    if (hdr) hdr.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    }
+
+    /* -------- 3. Scrollspy: highlight active ToC entry -------- */
+    function setupScrollspy() {
+        var tocLinks = $$('.toc-item a');
+        if (!tocLinks.length) return;
+
+        var sectionToTocItem = new Map();
+        tocLinks.forEach(function (a) {
+            var id = a.getAttribute('href') || '';
+            var target = document.querySelector(id);
+            if (target) sectionToTocItem.set(target, a.closest('.toc-item'));
+        });
+
+        if (!('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var item = sectionToTocItem.get(entry.target);
+                if (!item) return;
+                if (entry.isIntersecting && entry.intersectionRatio > 0) {
+                    item.dataset.intersecting = '1';
+                } else {
+                    delete item.dataset.intersecting;
+                }
+            });
+
+            $$('.toc-item').forEach(function (i) { i.classList.remove('is-active'); });
+            var visible = $$('.toc-item[data-intersecting="1"]');
+            if (visible.length) visible[0].classList.add('is-active');
+        }, {
+            rootMargin: '-15% 0px -75% 0px',
+            threshold: [0, 0.1]
+        });
+
+        sectionToTocItem.forEach(function (item, target) {
+            observer.observe(target);
+        });
+    }
+
+    /* -------- Init -------- */
+    function init() {
+        setupCollapsibles();
+        setupTocClickExpand();
+        setupScrollspy();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+</body>
+</html>
